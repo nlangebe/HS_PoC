@@ -1,1 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Split pane gutters */
+.Resizer {
+  background: #ddd;
+  opacity: 0.7;
+  z-index: 30; /* high z-index so gutters appear above content */
+  box-sizing: border-box;
+  background-clip: padding-box;
+  pointer-events: auto;
+  transition: background 0.2s ease;
+}
+
+/* Vertical gutter (between left and right panels) */
+.Resizer.vertical {
+  width: 6px;
+  margin: 0 -3px; /* overlap slightly outside panes */
+  cursor: col-resize;
+}
+
+.Resizer.vertical:hover {
+  background: #aaa;
+  opacity: 1;
+}
+
+.Resizer.horizontal {
+  height: 6px;
+  margin-top: -3px; /* pull gutter 3px up, but no bottom margin */
+  margin-bottom: 0;
+  cursor: row-resize;
+  z-index: 30;
+  pointer-events: auto;
+}
+
+.Resizer.horizontal:hover {
+  background: #aaa;
+  opacity: 1;
+}
+
+/* Make sure react-split-pane panes fill height fully */
+.Pane {
+  display: flex !important;
+  flex-direction: column;
+  height: 100% !important;
+  min-height: 0; /* allow flex children to shrink */
+}
+
+/* Viewer container under gutters */
+.viewer-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* behind gutters */
+}

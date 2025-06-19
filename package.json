@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "10.2.0",
+    "@react-three/fiber": "9.1.2",
+    "lucide-react": "0.514.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-split-pane": "0.1.92"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
