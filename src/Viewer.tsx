@@ -34,7 +34,7 @@ const Cube = () => {
 
 const Viewer: React.FC<ViewerProps> = ({ params, results }) => {
   return (
-    <div className="viewer-container">
+    <div className="w-full h-full relative flex-1 min-h-0">
       <Canvas
         style={{
           width: "100%",

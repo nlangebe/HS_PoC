@@ -49,11 +49,11 @@ const App: React.FC = () => {
         <SplitPane
           split="horizontal"
           minSize={150}
-          defaultSize="60%"
+          defaultSize="68%"
           style={{ position: "relative", height: "100%" }}
         >
           {/* Viewer */}
-          <div className="border-b border-gray-200 flex items-center justify-center h-full">
+          <div className="border-b border-gray-200 flex flex-col h-full min-h-0">
             <Viewer params={params} results={results} />
           </div>
 
