@@ -37,7 +37,7 @@ const App: React.FC = () => {
         style={{ position: "relative", flex: 1 }}
       >
         {/* Left Panel */}
-        <div className="p-4 overflow-auto h-full">
+        <div className="p-4 overflow-auto h-full min-w-0">
           <ParametersPanel
             params={params}
             setParams={setParams}
@@ -53,12 +53,12 @@ const App: React.FC = () => {
           style={{ position: "relative", height: "100%" }}
         >
           {/* Viewer */}
-          <div className="border-b border-gray-200 flex flex-col h-full min-h-0">
+          <div className="border-b border-gray-200 h-full w-full min-h-0 min-w-0 overflow-hidden flex">
             <Viewer params={params} results={results} />
           </div>
 
           {/* Results */}
-          <div className="p-4 overflow-auto h-full">
+          <div className="p-4 overflow-auto h-full min-w-0">
             <ResultsPanel results={results} />
           </div>
         </SplitPane>

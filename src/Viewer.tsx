@@ -14,8 +14,10 @@ interface ViewerProps {
   results: any[];
 }
 
-const Cube = () => {
-  const meshRef = useRef<THREE.Mesh>(null);
+const model = () => {
+  const gltf = useGLTF(
+    "https://threejs.org/examples/models/gltf/DamagedHelmet/glTF-Binary/DamagedHelmet.glb"
+  );
 
   useFrame(() => {
     if (meshRef.current) {
