@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 
 interface ViewerProps {
   params: {
@@ -13,11 +14,9 @@ interface ViewerProps {
   };
   results: any[];
 }
-
-const model = () => {
-  const gltf = useGLTF(
-    "https://threejs.org/examples/models/gltf/DamagedHelmet/glTF-Binary/DamagedHelmet.glb"
-  );
+/*
+const Cube = () => {
+  const meshRef = useRef<THREE.Mesh>(null);
 
   useFrame(() => {
     if (meshRef.current) {
@@ -32,6 +31,19 @@ const model = () => {
       <meshStandardMaterial color="orange" />
     </mesh>
   );
+};*/
+
+const Model = () => {
+  const gltf = useGLTF("Models/timber_truss_roof_structure_and_frame.glb"); // 👈 adjust name as needed
+
+  return (
+    <primitive
+      object={gltf.scene}
+      position={[0, -1, 0]}
+      scale={1.5}
+      rotation={[0, Math.PI, 0]}
+    />
+  );
 };
 
 const Viewer: React.FC<ViewerProps> = ({ params, results }) => {
@@ -44,12 +56,12 @@ const Viewer: React.FC<ViewerProps> = ({ params, results }) => {
           display: "block",
           pointerEvents: "auto",
         }}
-        camera={{ position: [3, 3, 3], fov: 50 }}
+        camera={{ position: [0, 0, 5], fov: 50 }}
       >
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
-        <Cube />
-        <OrbitControls enablePan enableRotate enableZoom={false} />
+        <Model />
+        <OrbitControls enablePan enableRotate enableZoom={true} />
       </Canvas>
 
       <div
