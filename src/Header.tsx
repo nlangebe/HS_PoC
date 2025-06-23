@@ -1,5 +1,5 @@
 import React from "react";
-import { Settings, User } from "lucide-react";
+import { User } from "lucide-react";
 
 interface HeaderProps {
   onOpenConfig: () => void;
@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ onOpenConfig, onOpenUserModal }) => {
         </nav>
       </div>
 
-      {/* RIGHT: Controls */}
+      {/* RIGHT: Country/Language + Separator + User Icon */}
       <div className="flex items-center space-x-3">
         <button
           onClick={onOpenConfig}
@@ -48,12 +48,8 @@ const Header: React.FC<HeaderProps> = ({ onOpenConfig, onOpenUserModal }) => {
           <span>| Language: EN</span>
         </button>
 
-        <button
-          title="Settings"
-          className="text-gray-800 hover:text-[#5b3a00] transition duration-200"
-        >
-          <Settings className="w-6 h-6 stroke-2" />
-        </button>
+        {/* Vertical bar separator */}
+        <span className="text-gray-400 mx-2 select-none">|</span>
 
         {/* User Icon */}
         <button

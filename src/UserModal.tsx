@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 
 interface UserModalProps {
   onClose: () => void;
 }
 
 const UserModal: React.FC<UserModalProps> = ({ onClose }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 z-50 flex items-center justify-center">
-      <div className="bg-white rounded-xl shadow-lg w-full max-w-lg p-6 relative">
+      <div
+        ref={modalRef}
+        className="bg-white rounded-xl shadow-lg w-full max-w-lg p-6 relative"
+      >
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -24,7 +53,9 @@ const UserModal: React.FC<UserModalProps> = ({ onClose }) => {
           />
           <div className="text-center space-y-2">
             <p className="text-lg font-semibold text-gray-800">John Doe</p>
-            <p className="text-sm text-gray-500">Desiger@customercompany.com</p>
+            <p className="text-sm text-gray-500">
+              designer@customercompany.com
+            </p>
             <p className="text-sm text-gray-500">Role: Design Engineer</p>
             <p className="text-sm text-gray-500">Team: Design Engineering</p>
           </div>

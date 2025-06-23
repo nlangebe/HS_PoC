@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 interface AppConfigurationModalProps {
   onClose: () => void;
@@ -57,7 +57,34 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
   const [language, setLanguage] = useState("English");
   const [designStandard, setDesignStandard] = useState("NDS 2018");
 
-  // update all settings when countryOfUse changes
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Handle outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [onClose]);
+
+  // Update settings when country changes
   useEffect(() => {
     const lang = countryLanguageMap[countryOfUse] || "English";
     setLanguage(lang);
@@ -70,16 +97,19 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
       setCountryOfPurchase("Canada");
     } else if (euCountries.includes(countryOfUse)) {
       setDesignStandard("EN 1995-1-1");
-      setCountryOfPurchase(countryOfUse); // default, but editable
+      setCountryOfPurchase(countryOfUse);
     } else {
       setDesignStandard("-");
-      setCountryOfPurchase(countryOfUse); // fallback
+      setCountryOfPurchase(countryOfUse);
     }
   }, [countryOfUse]);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 z-50 flex items-center justify-center">
-      <div className="bg-white rounded-xl shadow-lg w-full max-w-4xl p-4 relative">
+      <div
+        ref={modalRef}
+        className="bg-white rounded-xl shadow-lg w-full max-w-4xl p-4 relative"
+      >
         {/* Close button */}
         <button
           onClick={onClose}
