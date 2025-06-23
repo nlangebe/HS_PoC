@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TrussImg from "/Images/Truss.png";
 import JoistImg from "/Images/Joist.png";
 import MultiTrussImg from "/Images/Multi-Truss.png";
@@ -23,12 +23,14 @@ interface ParametersPanelProps {
   params: Parameters;
   setParams: React.Dispatch<React.SetStateAction<Parameters>>;
   onSearch: () => void;
+  country: string; // new prop for country
 }
 
 const ParametersPanel: React.FC<ParametersPanelProps> = ({
   params,
   setParams,
   onSearch,
+  country,
 }) => {
   // Manage collapsible sections open/close state
   const [openSections, setOpenSections] = useState({
@@ -42,9 +44,40 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
     setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
 
-  // Sample options for dropdowns (simplified)
-  const hangerTypes = ["All Types", "Type A", "Type B"];
-  const downloadDurations = ["Standard Term 1.00"];
+  // Fixed hanger types for all countries
+  const hangerTypes = ["All Types", "Top Flange", "Concealed Flange"];
+
+  // Load Duration options based on country
+  const usaLoadDurations = [
+    "Dead (90)",
+    "Floor (100)",
+    "Snow (115)",
+    "Roof (125)",
+    "Quake/Wind (160)",
+  ];
+  const canadaLoadDurations = ["Standard Term 1.00"];
+
+  // Determine options and disabled status dynamically
+  const isCanada = country === "Canada";
+  const isUSA = country === "USA";
+
+  const loadDurationOptions = isUSA
+    ? usaLoadDurations
+    : isCanada
+    ? canadaLoadDurations
+    : usaLoadDurations; // fallback to USA options for other countries
+
+  // Reset load duration if current value no longer valid for selected country
+  useEffect(() => {
+    if (!loadDurationOptions.includes(params.downloadDuration)) {
+      setParams((prev) => ({
+        ...prev,
+        downloadDuration: loadDurationOptions[0],
+      }));
+    }
+  }, [country]);
+
+  // Other dropdown options
   const upliftDurations = ["Short Term 1.15", "Medium Term 1.5"];
   const memberTypes = ["Solid Sawn", "Engineered"];
   const lumberSpecies = ["DF (Douglas Fir)", "SP (Spruce)"];
@@ -127,16 +160,11 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
         </header>
         {openSections.jobSettings && (
           <div className="p-3 grid grid-cols-2 gap-3">
-            {/* Hanger Type */}
+            {/* Hanger Type - REMOVE '?' */}
             <label className="flex flex-col">
               <span className="font-semibold mb-1 flex items-center">
                 Hanger Type
-                <span
-                  title="Choose hanger type"
-                  className="ml-1 text-gray-400 cursor-help"
-                >
-                  ?
-                </span>
+                {/* Removed the '?' icon here */}
               </span>
               <select
                 value={params.hangerType}
@@ -153,23 +181,37 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
               </select>
             </label>
 
-            {/* Download Duration (disabled) */}
-            <label className="flex flex-col opacity-50">
+            {/* Load Duration (tooltip fix applied) */}
+            <label className="flex flex-col">
               <span className="font-semibold mb-1 flex items-center">
-                Download Duration
-                <span
-                  title="Download duration info"
-                  className="ml-1 text-gray-400 cursor-help"
-                >
+                Load Duration
+                <span className="ml-1 text-gray-400 cursor-help relative group">
                   ?
+                  <div
+                    className="absolute left-1/2 -translate-x-1/2 mt-1 w-72 bg-white border border-gray-400 rounded p-2 text-[10px] text-gray-900 shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto z-50"
+                    role="tooltip"
+                  >
+                    Duration of load adjustments as specified by the code are as
+                    follows:
+                    <br />
+                    <b>"STANDARD TERM"</b> - (K~d~ = 1.00) design loads where
+                    the condition exceeds short term, but is less than
+                    long-term. For example snow, live loads and dead loads in
+                    combination.
+                  </div>
                 </span>
               </span>
               <select
-                disabled
+                disabled={isCanada}
                 value={params.downloadDuration}
-                className="border border-gray-300 rounded px-2 py-1 text-xs bg-gray-100 cursor-not-allowed"
+                onChange={(e) =>
+                  setParams({ ...params, downloadDuration: e.target.value })
+                }
+                className={`border border-gray-300 rounded px-2 py-1 text-xs ${
+                  isCanada ? "bg-gray-100 text-gray-500 cursor-not-allowed" : ""
+                }`}
               >
-                {downloadDurations.map((opt) => (
+                {loadDurationOptions.map((opt) => (
                   <option key={opt} value={opt}>
                     {opt}
                   </option>
@@ -177,15 +219,32 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
               </select>
             </label>
 
-            {/* Uplift Duration */}
+            {/* Uplift Duration (with safe tooltip) */}
             <label className="flex flex-col">
               <span className="font-semibold mb-1 flex items-center">
                 Uplift Duration
-                <span
-                  title="Uplift duration info"
-                  className="ml-1 text-gray-400 cursor-help"
-                >
+                <span className="ml-1 text-gray-400 cursor-help relative group">
                   ?
+                  <div
+                    className="absolute z-50 mt-1 left-1/2 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-0 
+                              w-[18rem] max-w-[90vw] bg-white border border-gray-400 rounded p-2 
+                              text-[10px] text-gray-900 shadow-xl 
+                              opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
+                    role="tooltip"
+                  >
+                    Duration of load adjustments as specified by the code are as
+                    follows:
+                    <br />
+                    <b>"SHORT TERM"</b> – (K<sub>d</sub> = 1.15): Design loads
+                    where the condition is not expected to last more than 7 days
+                    continuously or cumulatively. Earthquake and wind loads are
+                    considered short term loads.
+                    <br />
+                    <b>"STANDARD TERM"</b> – (K<sub>d</sub> = 1.00): Design
+                    loads where the condition exceeds short term, but is less
+                    than long-term. For example: snow, live loads, and dead
+                    loads in combination.
+                  </div>
                 </span>
               </span>
               <select
@@ -195,7 +254,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                 }
                 className="border border-gray-300 rounded px-2 py-1 text-xs"
               >
-                {upliftDurations.map((opt) => (
+                {["Short Term 1.15", "Medium Term 1.5"].map((opt) => (
                   <option key={opt} value={opt}>
                     {opt}
                   </option>
@@ -216,7 +275,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
               />
             </label>
 
-            {/* Quantity (full width) */}
+            {/* Quantity */}
             <label className="flex flex-col col-span-2">
               <span className="font-semibold mb-1">Quantity</span>
               <input
@@ -266,7 +325,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                 }
                 className="border border-gray-300 rounded px-2 py-1 text-xs"
               >
-                {memberTypes.map((opt) => (
+                {["Solid Sawn", "Engineered"].map((opt) => (
                   <option key={opt} value={opt}>
                     {opt}
                   </option>
@@ -284,7 +343,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                 }
                 className="border border-gray-300 rounded px-2 py-1 text-xs"
               >
-                {lumberSpecies.map((opt) => (
+                {["DF (Douglas Fir)", "SP (Spruce)"].map((opt) => (
                   <option key={opt} value={opt}>
                     {opt}
                   </option>
@@ -302,7 +361,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                 }
                 className="border border-gray-300 rounded px-2 py-1 text-xs"
               >
-                {widths.map((opt) => (
+                {['2x (1 1/2")', '3x (2 1/2")'].map((opt) => (
                   <option key={opt} value={opt}>
                     {opt}
                   </option>
@@ -320,7 +379,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                 }
                 className="border border-gray-300 rounded px-2 py-1 text-xs"
               >
-                {depths.map((opt) => (
+                {['6 (5 1/2")', '8 (7 1/4")'].map((opt) => (
                   <option key={opt} value={opt}>
                     {opt}
                   </option>
@@ -338,7 +397,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                 }
                 className="border border-gray-300 rounded px-2 py-1 text-xs"
               >
-                {numberOfPlies.map((opt) => (
+                {["1", "2", "3"].map((opt) => (
                   <option key={opt} value={opt}>
                     {opt}
                   </option>
@@ -383,8 +442,6 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
           </div>
         )}
       </section>
-
-      {/* JOIST (CARRIED MEMBER) section can be added here similarly */}
 
       {/* Search button at bottom */}
       <button

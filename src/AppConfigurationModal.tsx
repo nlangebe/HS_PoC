@@ -1,7 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface AppConfigurationModalProps {
   onClose: () => void;
+  countryOfUse: string;
+  setCountryOfUse: (country: string) => void;
+  language: string;
+  setLanguage: (lang: string) => void;
 }
 
 const countries = [
@@ -51,15 +55,14 @@ const euCountries = [
 
 const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
   onClose,
+  countryOfUse,
+  setCountryOfUse,
+  language,
+  setLanguage,
 }) => {
-  const [countryOfUse, setCountryOfUse] = useState("USA");
-  const [countryOfPurchase, setCountryOfPurchase] = useState("USA");
-  const [language, setLanguage] = useState("English");
-  const [designStandard, setDesignStandard] = useState("NDS 2018");
-
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // Handle outside click
+  // Close modal on outside click or Escape key
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -84,25 +87,23 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
     };
   }, [onClose]);
 
-  // Update settings when country changes
+  // Auto-update language when country changes
   useEffect(() => {
-    const lang = countryLanguageMap[countryOfUse] || "English";
-    setLanguage(lang);
-
-    if (countryOfUse === "USA") {
-      setDesignStandard("NDS 2018");
-      setCountryOfPurchase("USA");
-    } else if (countryOfUse === "Canada") {
-      setDesignStandard("CSA 086:19");
-      setCountryOfPurchase("Canada");
-    } else if (euCountries.includes(countryOfUse)) {
-      setDesignStandard("EN 1995-1-1");
-      setCountryOfPurchase(countryOfUse);
-    } else {
-      setDesignStandard("-");
-      setCountryOfPurchase(countryOfUse);
+    const autoLang = countryLanguageMap[countryOfUse] || "English";
+    if (language !== autoLang) {
+      setLanguage(autoLang);
     }
-  }, [countryOfUse]);
+  }, [countryOfUse, language, setLanguage]);
+
+  // Design Standard logic
+  const designStandard =
+    countryOfUse === "USA"
+      ? "NDS 2018"
+      : countryOfUse === "Canada"
+      ? "CSA 086:19"
+      : euCountries.includes(countryOfUse)
+      ? "EN 1995-1-1"
+      : "-";
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 z-50 flex items-center justify-center">
@@ -114,6 +115,7 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-600 hover:text-black text-xl"
+          aria-label="Close modal"
         >
           ×
         </button>
@@ -132,7 +134,9 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
             className="col-span-4 border border-gray-300 rounded px-2 py-1 w-full"
           >
             {countries.map((c) => (
-              <option key={c}>{c}</option>
+              <option key={c} value={c}>
+                {c}
+              </option>
             ))}
           </select>
 
@@ -142,13 +146,15 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
           </label>
           <select
             id="purchaseCountry"
-            value={countryOfPurchase}
-            onChange={(e) => setCountryOfPurchase(e.target.value)}
+            value={countryOfUse} // Disabled, so fixed to countryOfUse for simplicity
             disabled={countryOfUse === "USA" || countryOfUse === "Canada"}
             className="col-span-4 border border-gray-300 rounded px-2 py-1 w-full disabled:bg-gray-100 disabled:text-gray-500"
+            onChange={() => {}}
           >
             {countries.map((c) => (
-              <option key={c}>{c}</option>
+              <option key={c} value={c}>
+                {c}
+              </option>
             ))}
           </select>
 
@@ -162,11 +168,13 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
             onChange={(e) => setLanguage(e.target.value)}
             className="col-span-4 border border-gray-300 rounded px-2 py-1 w-full"
           >
-            {Object.values(countryLanguageMap)
-              .filter((v, i, a) => a.indexOf(v) === i) // unique
-              .map((lang) => (
-                <option key={lang}>{lang}</option>
-              ))}
+            {Array.from(new Set(Object.values(countryLanguageMap))).map(
+              (lang) => (
+                <option key={lang} value={lang}>
+                  {lang}
+                </option>
+              )
+            )}
           </select>
 
           {/* Design Standard */}

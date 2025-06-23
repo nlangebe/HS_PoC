@@ -6,9 +6,12 @@ import Viewer from "./Viewer";
 import ResultsPanel from "./ResultsPanel";
 import Header from "./Header";
 import AppConfigurationModal from "./AppConfigurationModal";
-import UserModal from "./UserModal"; // Make sure this file exists
+import UserModal from "./UserModal";
 
 const App: React.FC = () => {
+  const [country, setCountry] = useState("USA");
+  const [language, setLanguage] = useState("English");  // New language state
+
   const [params, setParams] = useState({
     type: "",
     header: "",
@@ -16,11 +19,21 @@ const App: React.FC = () => {
     fastener: "",
     skew: 0,
     slope: 0,
+    hangerType: "All Types",
+    downloadDuration: "Dead (90)",
+    upliftDuration: "",
+    jobId: "",
+    quantity: 1,
+    memberType: "",
+    lumberSpecies: "",
+    width: "",
+    depth: "",
+    numberOfPlies: "",
+    memberId: "",
+    lumberFinishRoughSawn: false,
   });
 
   const [results, setResults] = useState<any[]>([]);
-
-  // Modal state
   const [showAppConfig, setShowAppConfig] = useState(false);
   const [showUserModal, setShowUserModal] = useState(false);
 
@@ -33,47 +46,49 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 text-sm text-gray-800 flex flex-col">
-      {/* Header with modal triggers */}
       <Header
+        country={country}
+        language={language}           // Pass language to Header
         onOpenConfig={() => setShowAppConfig(true)}
         onOpenUserModal={() => setShowUserModal(true)}
       />
 
-      {/* Modals */}
       {showAppConfig && (
-        <AppConfigurationModal onClose={() => setShowAppConfig(false)} />
+        <AppConfigurationModal
+          onClose={() => setShowAppConfig(false)}
+          countryOfUse={country}      // Pass current country
+          setCountryOfUse={setCountry} // Pass country setter
+          language={language}          // Pass current language
+          setLanguage={setLanguage}    // Pass language setter
+        />
       )}
+
       {showUserModal && <UserModal onClose={() => setShowUserModal(false)} />}
 
-      {/* Main layout: Split panes */}
       <SplitPane
         split="vertical"
         minSize={250}
         defaultSize={420}
         style={{ position: "relative", flex: 1 }}
       >
-        {/* Left Panel */}
         <div className="p-4 overflow-auto h-full min-w-0">
           <ParametersPanel
             params={params}
             setParams={setParams}
             onSearch={search}
+            country={country}
           />
         </div>
 
-        {/* Right Panel: Viewer + Results */}
         <SplitPane
           split="horizontal"
           minSize={150}
           defaultSize="68%"
           style={{ position: "relative", height: "100%" }}
         >
-          {/* Viewer */}
           <div className="border-b border-gray-200 h-full w-full min-h-0 min-w-0 overflow-hidden flex">
             <Viewer params={params} results={results} />
           </div>
-
-          {/* Results */}
           <div className="p-4 overflow-auto h-full min-w-0">
             <ResultsPanel results={results} />
           </div>
