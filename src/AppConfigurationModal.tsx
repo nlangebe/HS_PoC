@@ -4,6 +4,22 @@ interface AppConfigurationModalProps {
   onClose: () => void;
 }
 
+const countries = [
+  "USA",
+  "Canada",
+  "United Kingdom",
+  "Norway",
+  "Poland",
+  "Germany",
+  "Denmark",
+  "France",
+  "Austria",
+  "New Zealand",
+  "Sweden",
+  "Italy",
+  "Australia",
+];
+
 const countryLanguageMap: Record<string, string> = {
   USA: "English",
   Canada: "English",
@@ -18,7 +34,7 @@ const countryLanguageMap: Record<string, string> = {
   Sweden: "Swedish",
   Norway: "Norwegian",
   Denmark: "Danish",
-  "": "English", // Fallback
+  "": "English", // fallback
 };
 
 const euCountries = [
@@ -36,25 +52,30 @@ const euCountries = [
 const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
   onClose,
 }) => {
-  const [country, setCountry] = useState("USA");
+  const [countryOfUse, setCountryOfUse] = useState("USA");
+  const [countryOfPurchase, setCountryOfPurchase] = useState("USA");
   const [language, setLanguage] = useState("English");
   const [designStandard, setDesignStandard] = useState("NDS 2018");
 
-  // Update language and design standard when country changes
+  // update all settings when countryOfUse changes
   useEffect(() => {
-    const lang = countryLanguageMap[country] || "English";
+    const lang = countryLanguageMap[countryOfUse] || "English";
     setLanguage(lang);
 
-    if (country === "USA") {
+    if (countryOfUse === "USA") {
       setDesignStandard("NDS 2018");
-    } else if (country === "Canada") {
+      setCountryOfPurchase("USA");
+    } else if (countryOfUse === "Canada") {
       setDesignStandard("CSA 086:19");
-    } else if (euCountries.includes(country)) {
+      setCountryOfPurchase("Canada");
+    } else if (euCountries.includes(countryOfUse)) {
       setDesignStandard("EN 1995-1-1");
+      setCountryOfPurchase(countryOfUse); // default, but editable
     } else {
       setDesignStandard("-");
+      setCountryOfPurchase(countryOfUse); // fallback
     }
-  }, [country]);
+  }, [countryOfUse]);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 z-50 flex items-center justify-center">
@@ -70,29 +91,35 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
         <h2 className="text-lg font-semibold mb-4">App Configuration</h2>
 
         <div className="grid grid-cols-5 gap-4 items-center text-sm">
-          {/* Country */}
-          <label htmlFor="country" className="col-span-1 font-medium">
-            Country
+          {/* Country of Use */}
+          <label htmlFor="useCountry" className="col-span-1 font-medium">
+            Country of Use
           </label>
           <select
-            id="country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            id="useCountry"
+            value={countryOfUse}
+            onChange={(e) => setCountryOfUse(e.target.value)}
             className="col-span-4 border border-gray-300 rounded px-2 py-1 w-full"
           >
-            <option>USA</option>
-            <option>Canada</option>
-            <option>United Kingdom</option>
-            <option>Norway</option>
-            <option>Poland</option>
-            <option>Germany</option>
-            <option>Denmark</option>
-            <option>France</option>
-            <option>Austria</option>
-            <option>New Zealand</option>
-            <option>Sweden</option>
-            <option>Italy</option>
-            <option>Australia</option>
+            {countries.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
+
+          {/* Country of Purchase */}
+          <label htmlFor="purchaseCountry" className="col-span-1 font-medium">
+            Country of Purchase
+          </label>
+          <select
+            id="purchaseCountry"
+            value={countryOfPurchase}
+            onChange={(e) => setCountryOfPurchase(e.target.value)}
+            disabled={countryOfUse === "USA" || countryOfUse === "Canada"}
+            className="col-span-4 border border-gray-300 rounded px-2 py-1 w-full disabled:bg-gray-100 disabled:text-gray-500"
+          >
+            {countries.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
           </select>
 
           {/* Language */}
@@ -106,7 +133,7 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
             className="col-span-4 border border-gray-300 rounded px-2 py-1 w-full"
           >
             {Object.values(countryLanguageMap)
-              .filter((v, i, a) => a.indexOf(v) === i) // unique languages
+              .filter((v, i, a) => a.indexOf(v) === i) // unique
               .map((lang) => (
                 <option key={lang}>{lang}</option>
               ))}
@@ -121,7 +148,7 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
             disabled
           />
 
-          {/* Design Method (Static) */}
+          {/* Design Method */}
           <label className="col-span-1 font-medium">Design Method</label>
           <input
             type="text"
@@ -130,7 +157,7 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
             disabled
           />
 
-          {/* Unit (Static) */}
+          {/* Unit */}
           <label className="col-span-1 font-medium">Unit</label>
           <input
             type="text"

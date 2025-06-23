@@ -6,6 +6,7 @@ import Viewer from "./Viewer";
 import ResultsPanel from "./ResultsPanel";
 import Header from "./Header";
 import AppConfigurationModal from "./AppConfigurationModal";
+import UserModal from "./UserModal"; // Make sure this file exists
 
 const App: React.FC = () => {
   const [params, setParams] = useState({
@@ -18,7 +19,10 @@ const App: React.FC = () => {
   });
 
   const [results, setResults] = useState<any[]>([]);
-  const [showConfigModal, setShowConfigModal] = useState(false); // <-- NEW
+
+  // Modal state
+  const [showAppConfig, setShowAppConfig] = useState(false);
+  const [showUserModal, setShowUserModal] = useState(false);
 
   const search = () => {
     setResults([
@@ -29,13 +33,19 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 text-sm text-gray-800 flex flex-col">
-      <Header onOpenConfig={() => setShowConfigModal(true)} />{" "}
-      {/* <-- pass handler */}
-      {/* Modal */}
-      {showConfigModal && (
-        <AppConfigurationModal onClose={() => setShowConfigModal(false)} />
+      {/* Header with modal triggers */}
+      <Header
+        onOpenConfig={() => setShowAppConfig(true)}
+        onOpenUserModal={() => setShowUserModal(true)}
+      />
+
+      {/* Modals */}
+      {showAppConfig && (
+        <AppConfigurationModal onClose={() => setShowAppConfig(false)} />
       )}
-      {/* Vertical split: Left (Parameters) / Right (Viewer + Results) */}
+      {showUserModal && <UserModal onClose={() => setShowUserModal(false)} />}
+
+      {/* Main layout: Split panes */}
       <SplitPane
         split="vertical"
         minSize={250}
@@ -51,7 +61,7 @@ const App: React.FC = () => {
           />
         </div>
 
-        {/* Right Panel: Horizontal split between Viewer and Results */}
+        {/* Right Panel: Viewer + Results */}
         <SplitPane
           split="horizontal"
           minSize={150}
