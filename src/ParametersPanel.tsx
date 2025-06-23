@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import TrussImg from "/Images/Truss.png";
+import JoistImg from "/Images/Joist.png";
+import MultiTrussImg from "/Images/Multi-Truss.png";
 
 interface Parameters {
   connectionType: "Joist" | "Truss" | "Multi-Truss" | "";
@@ -72,36 +75,39 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
         {openSections.connectionType && (
           <div className="p-3 grid grid-cols-3 gap-2">
             {[
-              { key: "Joist", label: "Joist (Flush Top)", icon: "🪵" },
-              { key: "Truss", label: "Truss (Flush Bottom)", icon: "🏗️" },
+              { key: "Joist", label: "Joist (Flush Top)", image: JoistImg },
+              { key: "Truss", label: "Truss (Flush Bottom)", image: TrussImg },
               {
                 key: "Multi-Truss",
                 label: "Multi-Truss (Flush Bottom)",
-                icon: "🧱",
+                image: MultiTrussImg,
               },
-            ].map((opt) => (
-              <button
-                key={opt.key}
-                onClick={() =>
-                  setParams({ ...params, connectionType: opt.key as any })
-                }
-                className={`relative flex flex-col items-center justify-center border rounded p-2 text-center
-                  ${
-                    params.connectionType === opt.key
-                      ? "bg-orange-300 border-orange-600 text-orange-900"
-                      : "bg-white border-gray-300 hover:bg-orange-50"
-                  }`}
-              >
-                <div className="text-3xl mb-1">{opt.icon}</div>
-                <div className="text-[10px]">{opt.label}</div>
-
-                {params.connectionType === opt.key && (
-                  <span className="absolute top-1 right-1 text-orange-900 text-lg">
-                    ✔
-                  </span>
-                )}
-              </button>
-            ))}
+            ].map((opt) => {
+              const isSelected = params.connectionType === opt.key;
+              return (
+                <button
+                  key={opt.key}
+                  onClick={() =>
+                    setParams({ ...params, connectionType: opt.key as any })
+                  }
+                  className={`relative flex flex-col items-center justify-center rounded p-2 text-center transition
+                            ${
+                              isSelected
+                                ? "border-2 border-orange-600 text-orange-900"
+                                : "border border-gray-300 hover:border-orange-400"
+                            }`}
+                  style={{ backgroundColor: "#f4f4f4" }}
+                >
+                  <img src={opt.image} alt={opt.label} className="h-10 mb-1" />
+                  <div className="text-[10px]">{opt.label}</div>
+                  {isSelected && (
+                    <span className="absolute top-1 right-1 text-orange-600 text-lg">
+                      ✔
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         )}
       </section>
