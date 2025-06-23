@@ -219,28 +219,27 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
               </select>
             </label>
 
-            {/* Uplift Duration (with safe tooltip) */}
-            <label className="flex flex-col">
+            {/* Uplift Duration (with safe tooltip placement) */}
+            <label className="flex flex-col relative">
               <span className="font-semibold mb-1 flex items-center">
                 Uplift Duration
                 <span className="ml-1 text-gray-400 cursor-help relative group">
                   ?
                   <div
-                    className="absolute z-50 mt-1 left-1/2 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-0 
-                              w-[18rem] max-w-[90vw] bg-white border border-gray-400 rounded p-2 
-                              text-[10px] text-gray-900 shadow-xl 
+                    className="absolute right-0 top-5 w-[18rem] max-w-[90vw] bg-white border border-gray-400 rounded p-2 
+                              text-[10px] text-gray-900 shadow-xl z-50 
                               opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
                     role="tooltip"
                   >
                     Duration of load adjustments as specified by the code are as
                     follows:
                     <br />
-                    <b>"SHORT TERM"</b> – (K<sub>d</sub> = 1.15): Design loads
+                    <b>"SHORT TERM"</b> – (K<sub>d</sub> = 1.15): design loads
                     where the condition is not expected to last more than 7 days
                     continuously or cumulatively. Earthquake and wind loads are
                     considered short term loads.
                     <br />
-                    <b>"STANDARD TERM"</b> – (K<sub>d</sub> = 1.00): Design
+                    <b>"STANDARD TERM"</b> – (K<sub>d</sub> = 1.00): design
                     loads where the condition exceeds short term, but is less
                     than long-term. For example: snow, live loads, and dead
                     loads in combination.
