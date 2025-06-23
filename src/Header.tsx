@@ -1,7 +1,11 @@
 import React from "react";
 import { Settings, Grid } from "lucide-react";
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onOpenConfig: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onOpenConfig }) => {
   return (
     <header className="h-12 bg-[#f4f4f4] border-b border-gray-300 flex items-center justify-between px-4 text-sm">
       {/* LEFT: Logo + Menu */}
@@ -32,8 +36,11 @@ const Header: React.FC = () => {
 
       {/* RIGHT: Location + Icons */}
       <div className="flex items-center space-x-3">
-        {/* Country & Language Box */}
-        <div className="border border-gray-400 rounded px-3 py-[2px] text-xs sm:text-sm text-black flex items-center space-x-2 font-semibold">
+        {/* Country & Language Box (Clickable) */}
+        <button
+          onClick={onOpenConfig}
+          className="border border-gray-400 rounded px-3 py-[2px] text-xs sm:text-sm text-black flex items-center space-x-2 font-semibold hover:bg-gray-200 transition"
+        >
           <span>Country:</span>
           <img
             src="https://flagcdn.com/us.svg"
@@ -41,7 +48,7 @@ const Header: React.FC = () => {
             className="h-4 w-6 object-cover"
           />
           <span>| Language: EN</span>
-        </div>
+        </button>
 
         {/* Settings icon */}
         <button

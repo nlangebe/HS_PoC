@@ -5,6 +5,7 @@ import ParametersPanel from "./ParametersPanel";
 import Viewer from "./Viewer";
 import ResultsPanel from "./ResultsPanel";
 import Header from "./Header";
+import AppConfigurationModal from "./AppConfigurationModal";
 
 const App: React.FC = () => {
   const [params, setParams] = useState({
@@ -17,6 +18,7 @@ const App: React.FC = () => {
   });
 
   const [results, setResults] = useState<any[]>([]);
+  const [showConfigModal, setShowConfigModal] = useState(false); // <-- NEW
 
   const search = () => {
     setResults([
@@ -27,8 +29,12 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 text-sm text-gray-800 flex flex-col">
-      <Header />
-
+      <Header onOpenConfig={() => setShowConfigModal(true)} />{" "}
+      {/* <-- pass handler */}
+      {/* Modal */}
+      {showConfigModal && (
+        <AppConfigurationModal onClose={() => setShowConfigModal(false)} />
+      )}
       {/* Vertical split: Left (Parameters) / Right (Viewer + Results) */}
       <SplitPane
         split="vertical"
