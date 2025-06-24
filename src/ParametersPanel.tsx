@@ -139,7 +139,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                     onClick={() =>
                       setParams({ ...params, connectionType: opt.key as any })
                     }
-                    className={relative flex flex-col items-center justify-center rounded p-2 text-center transition
+                    className={"relative flex flex-col items-center justify-center rounded p-2 text-center transition"
                             ${
                               isSelected
                                 ? "border-2 border-orange-600 text-orange-900"
