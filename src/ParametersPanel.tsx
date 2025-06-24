@@ -27,6 +27,75 @@ interface ParametersPanelProps {
   onOpenSlopeSkewModal: () => void; // ✅ this line
 }
 
+interface SkewSlopeSliderProps {
+  title: string;
+  min: number;
+  max: number;
+  value: number;
+  onChange: (v: number) => void;
+  marks?: number[];
+}
+
+const SkewSlopeSlider: React.FC<SkewSlopeSliderProps> = ({
+  title,
+  min,
+  max,
+  value,
+  onChange,
+  marks = [],
+}) => {
+  const markPosition = (mark: number) => ((mark - min) / (max - min)) * 100;
+
+  return (
+    <label className="flex flex-col w-full select-none">
+      <span className="font-semibold mb-1 text-sm">{title}</span>
+
+      <div className="flex items-center gap-4">
+        <input
+          type="range"
+          min={min}
+          max={max}
+          step={1}
+          value={value}
+          onChange={(e) => onChange(Number(e.target.value))}
+          className="flex-grow"
+          list={`${title.replace(/\s+/g, "")}Marks`}
+        />
+
+        <output className="w-14 text-right text-xs font-mono tabular-nums">
+          {value}°
+        </output>
+      </div>
+
+      {marks.length > 0 && (
+        <>
+          <div className="relative w-full flex justify-between text-xs text-gray-600 mt-1 select-none">
+            <span>{min}</span>
+            <span className="absolute left-1/2 -translate-x-1/2">0</span>
+            <span>{max}</span>
+          </div>
+
+          <div className="relative w-full mt-[-14px] h-2 pointer-events-none">
+            {marks.map((mark) => (
+              <div
+                key={mark}
+                className="absolute top-0 w-px h-3 bg-gray-400"
+                style={{ left: `${markPosition(mark)}%` }}
+              />
+            ))}
+          </div>
+
+          <datalist id={`${title.replace(/\s+/g, "")}Marks`}>
+            {marks.map((m) => (
+              <option key={m} value={m} label={m.toString()} />
+            ))}
+          </datalist>
+        </>
+      )}
+    </label>
+  );
+};
+
 const ParametersPanel: React.FC<ParametersPanelProps> = ({
   params,
   setParams,
@@ -606,48 +675,79 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
           </header>
 
           {openSections.hangerOptions && (
-            <div className="p-3 space-y-3">
+            <div className="p-3 space-y-4">
               <div
                 className="inline-block bg-orange-600 text-white text-xs px-4 py-1 rounded font-bold cursor-pointer select-none"
-                onClick={onOpenSlopeSkewModal} // ✅ this line triggers modal open
+                onClick={onOpenSlopeSkewModal}
               >
                 Slope & Skew Calculator
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-6">
+                {/* Skew */}
+                <SkewSlopeSlider
+                  title="Skew (Degrees)"
+                  value={params.skew}
+                  onChange={(v) => setParams({ ...params, skew: v })}
+                />
+
+                {/* Slope */}
+                <SkewSlopeSlider
+                  title="Slope (Degrees)"
+                  min={-49}
+                  max={49}
+                  value={params.slope}
+                  onChange={(v) => setParams({ ...params, slope: v })}
+                />
+
+                {/* Top Flange Bend */}
+                <SkewSlopeSlider
+                  title="Top Flange Bend (Degrees)"
+                  min={-30}
+                  max={30}
+                  value={params.topFlangeBend ?? 0}
+                  onChange={(v) => setParams({ ...params, topFlangeBend: v })}
+                />
+
+                {/* Top Flange Slope */}
+                <SkewSlopeSlider
+                  title="Top Flange Slope (Degrees)"
+                  min={-35}
+                  max={35}
+                  value={params.topFlangeSlope ?? 0}
+                  onChange={(v) => setParams({ ...params, topFlangeSlope: v })}
+                />
+
+                {/* Offset Direction */}
                 <label className="flex flex-col">
-                  <span className="font-semibold mb-1">Skew (Degrees)</span>
-                  <input type="range" min={-45} max={45} defaultValue={0} />
-                </label>
-                <label className="flex flex-col">
-                  <span className="font-semibold mb-1">Slope (Degrees)</span>
-                  <input type="range" min={-45} max={45} defaultValue={0} />
-                </label>
-                <label className="flex flex-col">
-                  <span className="font-semibold mb-1">
-                    Top Flange Bend (Degrees)
+                  <span className="font-semibold mb-1 text-sm">
+                    Offset Direction
                   </span>
-                  <input type="range" min={0} max={30} defaultValue={0} />
-                </label>
-                <label className="flex flex-col">
-                  <span className="font-semibold mb-1">
-                    Top Flange Slope (Degrees)
-                  </span>
-                  <input type="range" min={-45} max={45} defaultValue={0} />
-                </label>
-                <label className="flex flex-col">
-                  <span className="font-semibold mb-1">Offset Direction</span>
-                  <select className="border border-gray-300 rounded px-2 py-1 text-xs">
+                  <select
+                    className="border border-gray-300 rounded px-2 py-1 text-xs"
+                    value={params.offsetDirection ?? "Centered (No Offset)"}
+                    onChange={(e) =>
+                      setParams({ ...params, offsetDirection: e.target.value })
+                    }
+                  >
                     <option>Centered (No Offset)</option>
-                    <option>Left</option>
-                    <option>Right</option>
+                    <option>Left (Flush Right)</option>
+                    <option>Right (Flush Left)</option>
                   </select>
                 </label>
+
+                {/* High, Low, Center Flush */}
                 <label className="flex flex-col">
-                  <span className="font-semibold mb-1">
+                  <span className="font-semibold mb-1 text-sm">
                     High, Low, Center Flush
                   </span>
-                  <select className="border border-gray-300 rounded px-2 py-1 text-xs">
+                  <select
+                    className="border border-gray-300 rounded px-2 py-1 text-xs"
+                    value={params.highLowCenter ?? "Center"}
+                    onChange={(e) =>
+                      setParams({ ...params, highLowCenter: e.target.value })
+                    }
+                  >
                     <option>Center</option>
                     <option>High</option>
                     <option>Low</option>
