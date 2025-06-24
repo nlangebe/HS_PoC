@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface AppConfigurationModalProps {
   onClose: () => void;
@@ -62,6 +62,9 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
+  // Track if language was manually changed by user to avoid auto overwrite
+  const [languageManuallyChanged, setLanguageManuallyChanged] = useState(false);
+
   // Close modal on outside click or Escape key
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -87,13 +90,19 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
     };
   }, [onClose]);
 
-  // Auto-update language when country changes
+  // When country changes, reset language to default for country,
+  // and reset manual override flag (so language updates accordingly)
   useEffect(() => {
     const autoLang = countryLanguageMap[countryOfUse] || "English";
-    if (language !== autoLang) {
-      setLanguage(autoLang);
-    }
-  }, [countryOfUse, language, setLanguage]);
+    setLanguage(autoLang);
+    setLanguageManuallyChanged(false);
+  }, [countryOfUse, setLanguage]);
+
+  // Handle manual language change by user
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setLanguage(e.target.value);
+    setLanguageManuallyChanged(true);
+  };
 
   // Design Standard logic
   const designStandard =
@@ -165,7 +174,7 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
           <select
             id="language"
             value={language}
-            onChange={(e) => setLanguage(e.target.value)}
+            onChange={handleLanguageChange}
             className="col-span-4 border border-gray-300 rounded px-2 py-1 w-full"
           >
             {Array.from(new Set(Object.values(countryLanguageMap))).map(
