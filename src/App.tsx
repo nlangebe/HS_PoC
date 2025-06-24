@@ -10,7 +10,7 @@ import UserModal from "./UserModal";
 
 const App: React.FC = () => {
   const [country, setCountry] = useState("USA");
-  const [language, setLanguage] = useState("English");  // New language state
+  const [language, setLanguage] = useState("English"); // New language state
 
   const [params, setParams] = useState({
     type: "",
@@ -48,7 +48,7 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-gray-50 text-sm text-gray-800 flex flex-col">
       <Header
         country={country}
-        language={language}           // Pass language to Header
+        language={language} // Pass language to Header
         onOpenConfig={() => setShowAppConfig(true)}
         onOpenUserModal={() => setShowUserModal(true)}
       />
@@ -56,10 +56,10 @@ const App: React.FC = () => {
       {showAppConfig && (
         <AppConfigurationModal
           onClose={() => setShowAppConfig(false)}
-          countryOfUse={country}      // Pass current country
+          countryOfUse={country} // Pass current country
           setCountryOfUse={setCountry} // Pass country setter
-          language={language}          // Pass current language
-          setLanguage={setLanguage}    // Pass language setter
+          language={language} // Pass current language
+          setLanguage={setLanguage} // Pass language setter
         />
       )}
 
