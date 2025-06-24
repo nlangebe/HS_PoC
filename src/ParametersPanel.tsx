@@ -20,10 +20,11 @@ interface Parameters {
 }
 
 interface ParametersPanelProps {
-  params: Parameters;
-  setParams: React.Dispatch<React.SetStateAction<Parameters>>;
+  params: any;
+  setParams: any;
   onSearch: () => void;
-  country: string; // new prop for country
+  country: string;
+  onOpenSlopeSkewModal: () => void; // ✅ this line
 }
 
 const ParametersPanel: React.FC<ParametersPanelProps> = ({
@@ -31,6 +32,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
   setParams,
   onSearch,
   country,
+  onOpenSlopeSkewModal,
 }) => {
   // Manage collapsible sections open/close state
   const [openSections, setOpenSections] = useState({
@@ -91,13 +93,18 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
     : ["Short Term 1.15", "Medium Term 1.5"]; // fallback
 
   const memberTypes = ["Solid Sawn", "Engineered"];
-  const lumberSpecies = ["DF (Douglas Fir)", "SP (Spruce)"];
+  const lumberSpecies = [
+    "DF (Douglas Fir)",
+    "SP (Spruce)",
+    "SP (Southern Pine)",
+    "SPF(Spurce Pine Fir)",
+  ];
   const widths = ['2x (1 1/2")', '3x (2 1/2")'];
   const depths = ['6 (5 1/2")', '8 (7 1/4")'];
   const numberOfPlies = ["1", "2", "3"];
 
   return (
-    <div className="text-xs font-sans overflow-y-auto max-h-screen">
+    <div className="max-h-[calc(100vh+20px)] overflow-y-auto px-4 pb-20">
       <div className="text-xs font-sans">
         {/* INPUT Header */}
         <div className="uppercase font-bold text-gray-600 mb-2 tracking-wide">
@@ -139,12 +146,11 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                     onClick={() =>
                       setParams({ ...params, connectionType: opt.key as any })
                     }
-                    className={"relative flex flex-col items-center justify-center rounded p-2 text-center transition"
-                            ${
-                              isSelected
-                                ? "border-2 border-orange-600 text-orange-900"
-                                : "border border-gray-300 hover:border-orange-400"
-                            }}
+                    className={`relative flex flex-col items-center justify-center rounded p-2 text-center transition ${
+                      isSelected
+                        ? "border-2 border-orange-600 text-orange-900"
+                        : "border border-gray-300 hover:border-orange-400"
+                    }`}
                     style={{ backgroundColor: "#f4f4f4" }}
                   >
                     <img
@@ -227,11 +233,11 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                   onChange={(e) =>
                     setParams({ ...params, downloadDuration: e.target.value })
                   }
-                  className={border border-gray-300 rounded px-2 py-1 text-xs ${
+                  className={`border border-gray-300 rounded px-2 py-1 text-xs ${
                     isCanada
                       ? "bg-gray-100 text-gray-500 cursor-not-allowed"
                       : ""
-                  }}
+                  }`}
                 >
                   {loadDurationOptions.map((opt) => (
                     <option key={opt} value={opt}>
@@ -297,7 +303,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                 <span className="font-semibold mb-1">Job ID</span>
                 <input
                   type="text"
-                  value={params.jobId}
+                  value={params.jobId || "Job 1"}
                   onChange={(e) =>
                     setParams({ ...params, jobId: e.target.value })
                   }
@@ -355,7 +361,26 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                   }
                   className="border border-gray-300 rounded px-2 py-1 text-xs"
                 >
-                  {["Solid Sawn", "Engineered"].map((opt) => (
+                  {[
+                    "Solid Sawn",
+                    "Glulam",
+                    "Laminated Strand Lumber",
+                    "Laminated Veneer Lumber",
+                    "Parallel Strand Lumber",
+                    "I-Joist",
+                    "Floor Truss",
+                    "Ledger",
+                    "Masonry - Mid-Wall",
+                    "Masonry - Top-of-Wall",
+                    "Concrete",
+                    "Structural Steel",
+                    "Nailer",
+                    "Wall, Sheathed Flush",
+                    "Wall, Sheathed Gap",
+                    "Wall, Drywall Flush",
+                    "Wall, Drywall Flush @ Stud",
+                    "Wall, Drywall Gap",
+                  ].map((opt) => (
                     <option key={opt} value={opt}>
                       {opt}
                     </option>
@@ -373,7 +398,12 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                   }
                   className="border border-gray-300 rounded px-2 py-1 text-xs"
                 >
-                  {["DF (Douglas Fir)", "SP (Spruce)"].map((opt) => (
+                  {[
+                    "DF (Douglas Fir)",
+                    "SP (Spruce)",
+                    "SP (Southern Pine)",
+                    "SPF(Spurce Pine Fir)",
+                  ].map((opt) => (
                     <option key={opt} value={opt}>
                       {opt}
                     </option>
@@ -440,7 +470,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                 <span className="font-semibold mb-1">Member ID</span>
                 <input
                   type="text"
-                  value={params.memberId}
+                  value={params.memberId || "Joist 1"}
                   onChange={(e) =>
                     setParams({ ...params, memberId: e.target.value })
                   }
@@ -492,7 +522,12 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                 <span className="font-semibold mb-1">Member Type</span>
                 <select className="border border-gray-300 rounded px-2 py-1 text-xs">
                   <option>Solid Sawn</option>
-                  <option>Engineered</option>
+                  <option>Glulam</option>
+                  <option>Laminated Strand Lumber</option>
+                  <option>Laminated Veneer Lumber</option>
+                  <option>Parallel Strand Lumber</option>
+                  <option>I-Joist</option>
+                  <option>Floor Truss</option>
                 </select>
               </label>
               <label className="flex flex-col">
@@ -500,6 +535,8 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                 <select className="border border-gray-300 rounded px-2 py-1 text-xs">
                   <option>DF (Douglas Fir)</option>
                   <option>SP (Spruce)</option>
+                  <option>SP (Southern Pine)</option>
+                  <option>SPF(Spurce Pine Fir)</option>
                 </select>
               </label>
               <label className="flex flex-col">
@@ -567,11 +604,16 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
               {openSections.hangerOptions ? "▼" : "▶"}
             </span>
           </header>
+
           {openSections.hangerOptions && (
             <div className="p-3 space-y-3">
-              <div className="inline-block bg-orange-600 text-white text-xs px-4 py-1 rounded font-bold">
+              <div
+                className="inline-block bg-orange-600 text-white text-xs px-4 py-1 rounded font-bold cursor-pointer select-none"
+                onClick={onOpenSlopeSkewModal} // ✅ this line triggers modal open
+              >
                 Slope & Skew Calculator
               </div>
+
               <div className="grid grid-cols-2 gap-4">
                 <label className="flex flex-col">
                   <span className="font-semibold mb-1">Skew (Degrees)</span>

@@ -8,6 +8,9 @@ import Header from "./Header";
 import AppConfigurationModal from "./AppConfigurationModal";
 import UserModal from "./UserModal";
 
+// ✅ Import modal and image
+import SlopeAndSkewCalculator from "./SlopeAndSkewCalculator";
+
 const App: React.FC = () => {
   const [country, setCountry] = useState("USA");
   const [language, setLanguage] = useState("English"); // New language state
@@ -36,6 +39,9 @@ const App: React.FC = () => {
   const [results, setResults] = useState<any[]>([]);
   const [showAppConfig, setShowAppConfig] = useState(false);
   const [showUserModal, setShowUserModal] = useState(false);
+
+  // ✅ Modal state
+  const [isSlopeModalOpen, setIsSlopeModalOpen] = useState(false);
 
   const search = () => {
     setResults([
@@ -68,7 +74,7 @@ const App: React.FC = () => {
       <SplitPane
         split="vertical"
         minSize={250}
-        defaultSize={420}
+        defaultSize={520}
         style={{ position: "relative", flex: 1 }}
       >
         <div className="p-4 overflow-auto h-full min-w-0">
@@ -77,6 +83,8 @@ const App: React.FC = () => {
             setParams={setParams}
             onSearch={search}
             country={country}
+            // ✅ Pass open modal callback
+            onOpenSlopeSkewModal={() => setIsSlopeModalOpen(true)}
           />
         </div>
 
@@ -94,6 +102,13 @@ const App: React.FC = () => {
           </div>
         </SplitPane>
       </SplitPane>
+
+      {/* ✅ Modal rendering */}
+      <SlopeAndSkewCalculator
+        isOpen={isSlopeModalOpen}
+        onClose={() => setIsSlopeModalOpen(false)}
+        onCalculate={() => alert("Calculation triggered!")}
+      />
     </div>
   );
 };
