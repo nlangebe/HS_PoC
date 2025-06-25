@@ -8,6 +8,100 @@ import Header from "./Header";
 import AppConfigurationModal from "./AppConfigurationModal";
 import UserModal from "./UserModal";
 
+// ✅ Mocked Data results
+const sampleResults = [
+  {
+    id: "1",
+    model: "LU26",
+    cost: "Lowest",
+    load: "590 / 540",
+    material: "Steel",
+    faceFasteners: `(6) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+    joistFasteners: `(4) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+  },
+  {
+    id: "2",
+    model: "LU26",
+    cost: "+2.00%",
+    load: "640 / 540",
+    material: "Steel",
+    faceFasteners: `(6) 16HDG<br/>(0.162&quot; x 3 1/2&quot; HDG 16d Common)`,
+    joistFasteners: `(4) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+  },
+  {
+    id: "3",
+    model: "LU26",
+    cost: "+3.00%",
+    load: "575 / 540",
+    material: "Steel",
+    faceFasteners: `(6) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+    joistFasteners: `(4) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+  },
+  {
+    id: "4",
+    model: "LUS26",
+    cost: "+10.00%",
+    load: "780 / 765",
+    material: "Steel",
+    faceFasteners: `(4) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+    joistFasteners: `(3) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+  },
+  {
+    id: "5",
+    model: "LUS26",
+    cost: "+12.00%",
+    load: "695 / 765",
+    material: "Steel",
+    faceFasteners: `(4) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+    joistFasteners: `(3) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+  },
+  {
+    id: "6",
+    model: "LUS26",
+    cost: "+13.00%",
+    load: "810 / 1105",
+    material: "Steel",
+    faceFasteners: `(4) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+    joistFasteners: `(4) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+  },
+  {
+    id: "7",
+    model: "LUS26",
+    cost: "+15.00%",
+    load: "795 / 1105",
+    material: "Steel",
+    faceFasteners: `(4) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+    joistFasteners: `(4) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+  },
+  {
+    id: "8",
+    model: "PF26B",
+    cost: "+61.00%",
+    load: "900 / 470",
+    material: "Steel",
+    faceFasteners: `(2) 0.148&quot; x 2 1/2&quot;<br/>(HDG)`,
+    joistFasteners: `(4) 0.148&quot; x 2 1/2&quot;<br/>(HDG)`,
+  },
+  {
+    id: "9",
+    model: "LUC26Z",
+    cost: "+68.00%",
+    load: "715 / 730",
+    material: "Steel",
+    faceFasteners: `(6) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+    joistFasteners: `(4) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+  },
+  {
+    id: "10",
+    model: "PF26B",
+    cost: "+78.00%",
+    load: "1200 / 625",
+    material: "Steel",
+    faceFasteners: `(2) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+    joistFasteners: `(4) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+  },
+];
+
 // ✅ Import modal and image
 import SlopeAndSkewCalculator from "./SlopeAndSkewCalculator";
 
@@ -92,13 +186,13 @@ const App: React.FC = () => {
           split="horizontal"
           minSize={150}
           defaultSize="68%"
-          style={{ position: "relative", height: "100%" }}
+          style={{ position: "relative", height: "100vh" }}
         >
           <div className="border-b border-gray-200 h-full w-full min-h-0 min-w-0 overflow-hidden flex">
-            <Viewer params={params} results={results} />
+            <Viewer params={params} results={sampleResults} />
           </div>
-          <div className="p-4 overflow-auto h-full min-w-0">
-            <ResultsPanel results={results} />
+          <div className="p-4 overflow-auto h-full min-w-0 min-h-0">
+            <ResultsPanel results={sampleResults} />
           </div>
         </SplitPane>
       </SplitPane>
