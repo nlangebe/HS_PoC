@@ -45,15 +45,16 @@
 
 /* Horizontal gutter (between top and bottom panels) */
 .Resizer.horizontal {
-  height: 6px; /* visible and draggable */
-  margin-top: 0;
+  height: 6px; /* visible line height */
+  padding-top: 6px; /* extra grab space above */
+  padding-bottom: 6px; /* extra grab space below */
+  box-sizing: content-box; /* prevents padding from affecting height */
   cursor: row-resize;
   z-index: 30;
   background: #ddd;
   opacity: 0.8;
   pointer-events: auto;
   transition: background 0.2s ease;
-  box-sizing: border-box; /* ← restored default to avoid drag bug */
 }
 
 .Resizer.horizontal:hover {

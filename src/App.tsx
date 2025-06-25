@@ -148,7 +148,7 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-gray-50 text-sm text-gray-800 flex flex-col">
       <Header
         country={country}
-        language={language} // Pass language to Header
+        language={language}
         onOpenConfig={() => setShowAppConfig(true)}
         onOpenUserModal={() => setShowUserModal(true)}
       />
@@ -156,10 +156,10 @@ const App: React.FC = () => {
       {showAppConfig && (
         <AppConfigurationModal
           onClose={() => setShowAppConfig(false)}
-          countryOfUse={country} // Pass current country
-          setCountryOfUse={setCountry} // Pass country setter
-          language={language} // Pass current language
-          setLanguage={setLanguage} // Pass language setter
+          countryOfUse={country}
+          setCountryOfUse={setCountry}
+          language={language}
+          setLanguage={setLanguage}
         />
       )}
 
@@ -177,7 +177,6 @@ const App: React.FC = () => {
             setParams={setParams}
             onSearch={search}
             country={country}
-            // ✅ Pass open modal callback
             onOpenSlopeSkewModal={() => setIsSlopeModalOpen(true)}
           />
         </div>
@@ -186,7 +185,10 @@ const App: React.FC = () => {
           split="horizontal"
           minSize={150}
           defaultSize="68%"
-          style={{ position: "relative", height: "100vh" }}
+          style={{
+            position: "relative",
+            height: "calc(100vh - 200px)", // 👈 Adjust based on your header
+          }}
         >
           <div className="border-b border-gray-200 h-full w-full min-h-0 min-w-0 overflow-hidden flex">
             <Viewer params={params} results={sampleResults} />
