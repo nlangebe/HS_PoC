@@ -48,7 +48,7 @@ const Model = () => {
 
 const Viewer: React.FC<ViewerProps> = ({ params, results }) => {
   return (
-    <div className="w-full h-full relative flex-1 min-h-0">
+    <div className="w-full h-full relative min-h-0 min-w-0 flex-1 overflow-hidden">
       <Canvas
         style={{
           width: "100%",

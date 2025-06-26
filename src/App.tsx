@@ -1,56 +1,188 @@
 import React, { useState } from "react";
 import SplitPane from "react-split-pane";
-import Viewer from "./Viewer";
+
 import ParametersPanel from "./ParametersPanel";
-import Viewer from "./Viewer"; // ← add this
-import ResultsPanel from "./ResultsPanel"; // ← and this
+import Viewer from "./Viewer";
+import ResultsPanel from "./ResultsPanel";
 import Header from "./Header";
 import AppConfigurationModal from "./AppConfigurationModal";
 import UserModal from "./UserModal";
 import SlopeAndSkewCalculator from "./SlopeAndSkewCalculator";
 
-const LeftPanel = () => (
-  <div className="p-4 bg-yellow-100 h-full">Left Panel</div>
-);
-const TopRightPanel = () => (
-  <div className="p-4 bg-blue-100 h-full">Top Right (Viewer)</div>
-);
-const BottomRightPanel = () => (
-  <div className="p-4 bg-green-100 h-full">Bottom Right (Results)</div>
-);
+// ✅ Mocked Data results
+const sampleResults = [
+  {
+    id: "1",
+    model: "LU26",
+    cost: "Lowest",
+    load: "590 / 540",
+    material: "Steel",
+    faceFasteners: `(6) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+    joistFasteners: `(4) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+  },
+  {
+    id: "2",
+    model: "LU26",
+    cost: "+2.00%",
+    load: "640 / 540",
+    material: "Steel",
+    faceFasteners: `(6) 16HDG<br/>(0.162&quot; x 3 1/2&quot; HDG 16d Common)`,
+    joistFasteners: `(4) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+  },
+  {
+    id: "3",
+    model: "LU26",
+    cost: "+3.00%",
+    load: "575 / 540",
+    material: "Steel",
+    faceFasteners: `(6) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+    joistFasteners: `(4) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+  },
+  {
+    id: "4",
+    model: "LUS26",
+    cost: "+10.00%",
+    load: "780 / 765",
+    material: "Steel",
+    faceFasteners: `(4) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+    joistFasteners: `(3) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+  },
+  {
+    id: "5",
+    model: "LUS26",
+    cost: "+12.00%",
+    load: "695 / 765",
+    material: "Steel",
+    faceFasteners: `(4) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+    joistFasteners: `(3) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+  },
+  {
+    id: "6",
+    model: "LUS26",
+    cost: "+13.00%",
+    load: "810 / 1105",
+    material: "Steel",
+    faceFasteners: `(4) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+    joistFasteners: `(4) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+  },
+  {
+    id: "7",
+    model: "LUS26",
+    cost: "+15.00%",
+    load: "795 / 1105",
+    material: "Steel",
+    faceFasteners: `(4) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+    joistFasteners: `(4) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+  },
+  {
+    id: "8",
+    model: "PF26B",
+    cost: "+61.00%",
+    load: "900 / 470",
+    material: "Steel",
+    faceFasteners: `(2) 0.148&quot; x 2 1/2&quot;<br/>(HDG)`,
+    joistFasteners: `(4) 0.148&quot; x 2 1/2&quot;<br/>(HDG)`,
+  },
+  {
+    id: "9",
+    model: "LUC26Z",
+    cost: "+68.00%",
+    load: "715 / 730",
+    material: "Steel",
+    faceFasteners: `(6) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+    joistFasteners: `(4) N10<br/>(0.148&quot; x 1 1/2&quot; HDG)`,
+  },
+  {
+    id: "10",
+    model: "PF26B",
+    cost: "+78.00%",
+    load: "1200 / 625",
+    material: "Steel",
+    faceFasteners: `(2) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+    joistFasteners: `(4) 10HDG<br/>(0.148&quot; x 3&quot; HDG 10d Common)`,
+  },
+];
 
-const App = () => {
+const App: React.FC = () => {
+  const [country, setCountry] = useState("USA");
+  const [language, setLanguage] = useState("English");
+
+  const [params, setParams] = useState({
+    type: "",
+    header: "",
+    joist: "",
+    fastener: "",
+    skew: 0,
+    slope: 0,
+    hangerType: "All Types",
+    downloadDuration: "Dead (90)",
+    upliftDuration: "",
+    jobId: "",
+    quantity: 1,
+    memberType: "",
+    lumberSpecies: "",
+    width: "",
+    depth: "",
+    numberOfPlies: "",
+    memberId: "",
+    lumberFinishRoughSawn: false,
+  });
+
+  const [results, setResults] = useState<any[]>([]);
+  const [showAppConfig, setShowAppConfig] = useState(false);
+  const [showUserModal, setShowUserModal] = useState(false);
+  const [isSlopeModalOpen, setIsSlopeModalOpen] = useState(false);
+
+  const search = () => {
+    setResults([
+      { model: "HUS26", cost: "Medium", load: "85%", material: "ZMAX®" },
+      { model: "ABC123", cost: "High", load: "90%", material: "Galvanized" },
+    ]);
+  };
+
   return (
-    <div className="flex flex-col h-screen">
-      {/* Header */}
-      <div className="h-12 bg-gray-200">Header</div>
-
-      {/* Main content */}
-      <div className="flex flex-1 min-h-0">
-        <SplitPane
-          split="vertical"
-          minSize={200}
-          defaultSize={300}
-          className="split-pane-container flex min-h-0"
-        >
-          {/* Left panel */}
-          <LeftPanel />
-
-          {/* Right panel: MUST be flex column with full height */}
-          <div className="flex flex-col h-full min-h-0">
-            <SplitPane
-              split="horizontal"
-              minSize={100}
-              defaultSize="60%"
-              className="split-pane-container"
-              style={{ height: "100%" }} // make sure SplitPane fills parent height
-            >
-              <Viewer params={params} results={sampleResults} />
-              <ResultsPanel results={sampleResults} />
-            </SplitPane>
+    <div className="h-screen bg-gray-50 text-sm text-gray-800 flex flex-col">
+      <div className="App">
+        <SplitPane split="vertical" defaultSize={150} allowResize={true}>
+          <div className="settingsDiv">
+            <h1>SCCS Corona Dashboard</h1>
           </div>
+          <SplitPane
+            split="horizontal"
+            minSize={100}
+            maxSize={-100}
+            defaultSize={"50%"}
+          >
+            <div className="simulationDiv" />
+            <div className="statisticsDiv" />
+          </SplitPane>
         </SplitPane>
       </div>
+
+      <Header
+        country={country}
+        language={language}
+        onOpenConfig={() => setShowAppConfig(true)}
+        onOpenUserModal={() => setShowUserModal(true)}
+      />
+
+      {showAppConfig && (
+        <AppConfigurationModal
+          onClose={() => setShowAppConfig(false)}
+          countryOfUse={country}
+          setCountryOfUse={setCountry}
+          language={language}
+          setLanguage={setLanguage}
+        />
+      )}
+      {showUserModal && <UserModal onClose={() => setShowUserModal(false)} />}
+
+      {/* ✅ Modal rendering */}
+      <SlopeAndSkewCalculator
+        isOpen={isSlopeModalOpen}
+        onClose={() => setIsSlopeModalOpen(false)}
+        onCalculate={() => alert("Calculation triggered!")}
+      />
     </div>
   );
 };

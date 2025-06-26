@@ -40,7 +40,7 @@ const ResultsPanel: React.FC<ResultsPanelProps> = ({ results }) => {
   };
 
   return (
-    <div className="mt-2 border border-gray-300 rounded text-xs">
+    <div className="mt-2 border border-gray-300 rounded text-xs h-full overflow-y-auto p-2">
       {/* Tabs */}
       <div className="flex bg-gray-200 text-sm uppercase font-semibold">
         {["output", "joblist"].map((tab) => (
