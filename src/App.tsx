@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SplitPane from "react-split-pane";
-
+import "./index.css";
 import ParametersPanel from "./ParametersPanel";
 import Viewer from "./Viewer";
 import ResultsPanel from "./ResultsPanel";
@@ -141,24 +141,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="h-screen bg-gray-50 text-sm text-gray-800 flex flex-col">
-      <div className="App">
-        <SplitPane split="vertical" defaultSize={150} allowResize={true}>
-          <div className="settingsDiv">
-            <h1>SCCS Corona Dashboard</h1>
-          </div>
-          <SplitPane
-            split="horizontal"
-            minSize={100}
-            maxSize={-100}
-            defaultSize={"50%"}
-          >
-            <div className="simulationDiv" />
-            <div className="statisticsDiv" />
-          </SplitPane>
-        </SplitPane>
-      </div>
-
+    <div className="flex flex-col h-screen">
       <Header
         country={country}
         language={language}
@@ -166,6 +149,52 @@ const App: React.FC = () => {
         onOpenUserModal={() => setShowUserModal(true)}
       />
 
+      <div className="App flex-1 flex flex-col min-h-0">
+        <SplitPane
+          split="vertical"
+          defaultSize={450}
+          allowResize={true}
+          style={{ position: "relative", flex: 1 }}
+        >
+          {/* Left Panel */}
+          <div className="p-4 h-full min-w-0">
+            <ParametersPanel
+              params={params}
+              setParams={setParams}
+              onSearch={search}
+              country={country}
+              onOpenSlopeSkewModal={() => setIsSlopeModalOpen(true)}
+            />
+          </div>
+
+          {/* Right Panel with nested horizontal SplitPane */}
+          <div className="flex flex-col flex-1 min-h-0 min-w-0">
+            <SplitPane
+              split="horizontal"
+              defaultSize="50%"
+              style={{
+                position: "relative",
+                height: "100%",
+                minHeight: 0,
+                backgroundColor: "yellow",
+              }}
+            >
+              {/* Top half */}
+              <div style={{ height: "100%", backgroundColor: "red" }}>
+                <Viewer params={params} results={sampleResults} />
+              </div>
+
+              {/* Bottom half */}
+              <div style={{ height: "100%", backgroundColor: "blue" }}>
+                <ResultsPanel results={sampleResults} />
+              </div>
+            </SplitPane>
+          </div>
+        </SplitPane>
+      </div>
+
+      {/* ✅ Modal rendering */}
+      {/* APP CONFIG*/}
       {showAppConfig && (
         <AppConfigurationModal
           onClose={() => setShowAppConfig(false)}
@@ -175,9 +204,10 @@ const App: React.FC = () => {
           setLanguage={setLanguage}
         />
       )}
+      {/* USER PARAMETERS*/}
       {showUserModal && <UserModal onClose={() => setShowUserModal(false)} />}
 
-      {/* ✅ Modal rendering */}
+      {/* SLOPE AND SKEW CALCULATOR */}
       <SlopeAndSkewCalculator
         isOpen={isSlopeModalOpen}
         onClose={() => setIsSlopeModalOpen(false)}

@@ -4,11 +4,21 @@
 
 /* Viewer container under gutters */
 .viewer-container {
-  position: relative;
   width: 100%;
   height: 100%;
-  z-index: 0; /* behind gutters */
-  overflow: visible; /* Ensure gutter isn't clipped */
+  max-height: 100%;
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.App {
+  height: 100%;
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .settingsDiv,
@@ -78,10 +88,10 @@
 
 /* Ensure SplitPane panes behave well inside flex layout */
 .Pane {
-  display: flex !important;
-  flex-direction: column;
   height: 100% !important;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 html,
@@ -90,5 +100,5 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* prevent scroll on body */
+  /* prevent scroll on body */
 }
