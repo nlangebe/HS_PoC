@@ -141,7 +141,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="App">
       <Header
         country={country}
         language={language}
@@ -149,49 +149,45 @@ const App: React.FC = () => {
         onOpenUserModal={() => setShowUserModal(true)}
       />
 
-      <div className="App flex-1 flex flex-col min-h-0">
-        <SplitPane
-          split="vertical"
-          defaultSize={450}
-          allowResize={true}
-          style={{ position: "relative", flex: 1 }}
-        >
-          {/* Left Panel */}
-          <div className="p-4 h-full min-w-0">
-            <ParametersPanel
-              params={params}
-              setParams={setParams}
-              onSearch={search}
-              country={country}
-              onOpenSlopeSkewModal={() => setIsSlopeModalOpen(true)}
-            />
-          </div>
+      <SplitPane
+        split="vertical"
+        defaultSize={450}
+        allowResize={true}
+        style={{ position: "relative", flex: 1 }}
+      >
+        {/* Left Panel */}
+        <div className="p-4 h-full min-w-0">
+          <ParametersPanel
+            params={params}
+            setParams={setParams}
+            onSearch={search}
+            country={country}
+            onOpenSlopeSkewModal={() => setIsSlopeModalOpen(true)}
+          />
+        </div>
+        {/* Right Panel with nested horizontal SplitPane */}
+        <div className="flex flex-col flex-1 min-h-0 min-w-0">
+          <SplitPane
+            split="horizontal"
+            defaultSize="50%"
+            style={{
+              position: "relative",
+              flex: 1, // ✅ Flex-grow instead of height: 100%
+              minHeight: 0,
+            }}
+          >
+            {/* Top half */}
+            <div style={{ height: "100%" }}>
+              <Viewer params={params} results={sampleResults} />
+            </div>
 
-          {/* Right Panel with nested horizontal SplitPane */}
-          <div className="flex flex-col flex-1 min-h-0 min-w-0">
-            <SplitPane
-              split="horizontal"
-              defaultSize="50%"
-              style={{
-                position: "relative",
-                height: "100%",
-                minHeight: 0,
-                backgroundColor: "yellow",
-              }}
-            >
-              {/* Top half */}
-              <div style={{ height: "100%", backgroundColor: "red" }}>
-                <Viewer params={params} results={sampleResults} />
-              </div>
-
-              {/* Bottom half */}
-              <div style={{ height: "100%", backgroundColor: "blue" }}>
-                <ResultsPanel results={sampleResults} />
-              </div>
-            </SplitPane>
-          </div>
-        </SplitPane>
-      </div>
+            {/* Bottom half */}
+            <div style={{ height: "100%" }}>
+              <ResultsPanel results={sampleResults} />
+            </div>
+          </SplitPane>
+        </div>
+      </SplitPane>
 
       {/* ✅ Modal rendering */}
       {/* APP CONFIG*/}

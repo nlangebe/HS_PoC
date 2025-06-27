@@ -6,9 +6,13 @@ html,
 body,
 #root {
   height: 100%;
-  margin: 0;
-  padding: 0;
-  /* prevent scroll on body */
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 /* Viewer container under gutters */
@@ -39,7 +43,7 @@ body,
 .Resizer {
   background: #000;
   opacity: 0.2;
-  z-index: 1;
+  z-index: 10 !important;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -86,9 +90,7 @@ body,
   border-color: transparent;
 }
 
-/* Ensure SplitPane panes behave well inside flex layout */
 .Pane {
-  height: 100% !important;
   min-height: 0;
   display: flex;
   flex-direction: column;
