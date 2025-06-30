@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import React, { useState } from "react";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useGLTF } from "@react-three/drei";
 
@@ -14,28 +14,17 @@ interface ViewerProps {
   };
   results: any[];
 }
-/*
-const Cube = () => {
-  const meshRef = useRef<THREE.Mesh>(null);
 
-  useFrame(() => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += 0.005;
-      meshRef.current.rotation.x += 0.002;
-    }
-  });
+// Pass visibility flags as props for demonstration
+const Model: React.FC<{
+  showCarrying: boolean;
+  showCarried: boolean;
+  showHanger: boolean;
+}> = ({ showCarrying, showCarried, showHanger }) => {
+  const gltf = useGLTF("Models/timber_truss_roof_structure_and_frame.glb");
 
-  return (
-    <mesh ref={meshRef} position={[0, 0, 0]}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="orange" />
-    </mesh>
-  );
-};*/
-
-const Model = () => {
-  const gltf = useGLTF("Models/timber_truss_roof_structure_and_frame.glb"); // 👈 adjust name as needed
-
+  // TODO: Implement actual logic to toggle visibility of parts in the model
+  // For now, we just render the full model
   return (
     <primitive
       object={gltf.scene}
@@ -47,6 +36,10 @@ const Model = () => {
 };
 
 const Viewer: React.FC<ViewerProps> = ({ params, results }) => {
+  const [showCarrying, setShowCarrying] = useState(true);
+  const [showCarried, setShowCarried] = useState(true);
+  const [showHanger, setShowHanger] = useState(true);
+
   return (
     <div className="w-full h-full relative min-h-0 min-w-0 flex-1 overflow-hidden">
       <Canvas
@@ -60,29 +53,62 @@ const Viewer: React.FC<ViewerProps> = ({ params, results }) => {
       >
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
-        <Model />
-        <OrbitControls enablePan enableRotate enableZoom={true} />
+        <Model
+          showCarrying={showCarrying}
+          showCarried={showCarried}
+          showHanger={showHanger}
+        />
+        <OrbitControls enablePan enableRotate enableZoom />
       </Canvas>
 
+      {/* Bottom-right 3D viewer settings panel */}
       <div
         style={{
           position: "absolute",
           bottom: 10,
-          left: 10,
+          right: 10,
           color: "white",
-          backgroundColor: "rgba(0,0,0,0.3)",
-          padding: 8,
-          borderRadius: 4,
+          backgroundColor: "rgba(0,0,0,0.5)",
+          padding: 12,
+          borderRadius: 6,
           fontSize: 14,
-          maxWidth: "90%",
+          maxWidth: 200,
           userSelect: "none",
-          pointerEvents: "none",
         }}
       >
-        <p>
-          Selected connection type: <strong>{params.type || "None"}</strong>
-        </p>
-        <p>Results count: {results.length}</p>
+        <h4 style={{ marginBottom: 8, fontWeight: "bold" }}>
+          Object Visibility
+        </h4>
+
+        <label style={{ display: "block", marginBottom: 6 }}>
+          <input
+            type="checkbox"
+            checked={showCarrying}
+            onChange={(e) => setShowCarrying(e.target.checked)}
+            style={{ marginRight: 6 }}
+          />
+          Carrying
+        </label>
+
+        <label style={{ display: "block", marginBottom: 6 }}>
+          <input
+            type="checkbox"
+            checked={showCarried}
+            onChange={(e) => setShowCarried(e.target.checked)}
+            style={{ marginRight: 6 }}
+          />
+          Carried
+        </label>
+
+        <label style={{ display: "block", marginBottom: 6 }}>
+          <input
+            type="checkbox"
+            checked={showHanger}
+            onChange={(e) => setShowHanger(e.target.checked)}
+            style={{ marginRight: 6 }}
+          />
+          Hanger
+        </label>
       </div>
     </div>
   );
