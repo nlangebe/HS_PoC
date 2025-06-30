@@ -1,0 +1,37 @@
+{
+    "userModal": {
+      "role": "Role",
+      "team": "Team"
+    },
+    "viewer": {
+      "objectVisibility": "Object Visibility",
+      "carrying": "Carrying",
+      "carried": "Carried",
+      "hanger": "Hanger"
+    },
+    "resultsPanel": {
+      "tabs": {
+        "output": "Output",
+        "jobList": "Job List"
+      },
+      "addToJobList": "Add to Job list",
+      "tableHeaders": {
+        "model": "Model",
+        "cost": "Cost",
+        "load": "Load",
+        "material": "Material",
+        "faceFasteners": "Face Fasteners",
+        "joistFasteners": "Joist Fasteners",
+        "edit": "Edit",
+        "job": "Job",
+        "quantity": "Quantity",
+        "remove": "Remove"
+      },
+      "placeholders": {
+        "noResults": "No results found – placeholder for connector table",
+        "noJobAdded": "No job added yet"
+      },
+      "fastenerTotals": "Fastener Totals"
+    }
+  }
+  

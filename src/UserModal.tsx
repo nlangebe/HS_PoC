@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 interface UserModalProps {
   onClose: () => void;
@@ -6,6 +7,7 @@ interface UserModalProps {
 
 const UserModal: React.FC<UserModalProps> = ({ onClose }) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation(); 
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

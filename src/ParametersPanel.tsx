@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TrussImg from "/Images/Truss.png";
 import JoistImg from "/Images/Joist.png";
 import MultiTrussImg from "/Images/Multi-Truss.png";
+import { useTranslation } from "react-i18next";
 
 interface Parameters {
   connectionType: "Joist" | "Truss" | "Multi-Truss" | "";
@@ -45,6 +46,7 @@ const SkewSlopeSlider: React.FC<SkewSlopeSliderProps> = ({
   marks = [],
 }) => {
   const markPosition = (mark: number) => ((mark - min) / (max - min)) * 100;
+  const { t } = useTranslation();
 
   return (
     <label className="flex flex-col w-full select-none">

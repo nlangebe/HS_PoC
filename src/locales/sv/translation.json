@@ -1,0 +1,37 @@
+{
+    "userModal": {
+      "role": "Roll",
+      "team": "Team"
+    },
+    "viewer": {
+      "objectVisibility": "Objektsynlighet",
+      "carrying": "Bärande",
+      "carried": "Buret",
+      "hanger": "Stöd"
+    },
+    "resultsPanel": {
+      "tabs": {
+        "output": "Resultat",
+        "jobList": "Jobblista"
+      },
+      "addToJobList": "Lägg till i jobblista",
+      "tableHeaders": {
+        "model": "Modell",
+        "cost": "Kostnad",
+        "load": "Last",
+        "material": "Material",
+        "faceFasteners": "Frontfästen",
+        "joistFasteners": "Balkfästen",
+        "edit": "Redigera",
+        "job": "Jobb",
+        "quantity": "Antal",
+        "remove": "Ta bort"
+      },
+      "placeholders": {
+        "noResults": "Inga resultat hittades – platshållare för kopplingstabell",
+        "noJobAdded": "Inga jobb tillagda"
+      },
+      "fastenerTotals": "Totala fästen"
+    }
+  }
+  

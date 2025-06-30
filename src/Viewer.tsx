@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useGLTF } from "@react-three/drei";
+import { useTranslation } from "react-i18next";
 
 interface ViewerProps {
   params: {
@@ -21,6 +22,8 @@ const Model: React.FC<{
   showCarried: boolean;
   showHanger: boolean;
 }> = ({ showCarrying, showCarried, showHanger }) => {
+  const { t } = useTranslation();
+
   const gltf = useGLTF("Models/timber_truss_roof_structure_and_frame.glb");
 
   // TODO: Implement actual logic to toggle visibility of parts in the model

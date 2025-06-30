@@ -1,0 +1,37 @@
+{
+    "userModal": {
+      "role": "Rôle",
+      "team": "Équipe"
+    },
+    "viewer": {
+      "objectVisibility": "Visibilité des objets",
+      "carrying": "Portant",
+      "carried": "Porté",
+      "hanger": "Support"
+    },
+    "resultsPanel": {
+      "tabs": {
+        "output": "Résultats",
+        "jobList": "Liste des tâches"
+      },
+      "addToJobList": "Ajouter à la liste des tâches",
+      "tableHeaders": {
+        "model": "Modèle",
+        "cost": "Coût",
+        "load": "Charge",
+        "material": "Matériau",
+        "faceFasteners": "Fixations de face",
+        "joistFasteners": "Fixations de solive",
+        "edit": "Éditer",
+        "job": "Tâche",
+        "quantity": "Quantité",
+        "remove": "Supprimer"
+      },
+      "placeholders": {
+        "noResults": "Aucun résultat trouvé – espace réservé pour la table des connecteurs",
+        "noJobAdded": "Aucune tâche ajoutée"
+      },
+      "fastenerTotals": "Totaux des fixations"
+    }
+  }
+  

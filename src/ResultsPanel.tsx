@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface Result {
   id: string;
@@ -20,6 +21,7 @@ interface ResultsPanelProps {
 }
 
 const ResultsPanel: React.FC<ResultsPanelProps> = ({ results }) => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<"output" | "joblist">("output");
   const [selectedRowId, setSelectedRowId] = useState<string | null>(null);
   const [jobList, setJobList] = useState<JobItem[]>([]);

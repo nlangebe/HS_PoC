@@ -1,0 +1,37 @@
+{
+    "userModal": {
+      "role": "Rolle",
+      "team": "Team"
+    },
+    "viewer": {
+      "objectVisibility": "Objektsynlighet",
+      "carrying": "Bærende",
+      "carried": "Båret",
+      "hanger": "Støtte"
+    },
+    "resultsPanel": {
+      "tabs": {
+        "output": "Resultat",
+        "jobList": "Jobbliste"
+      },
+      "addToJobList": "Legg til i jobbliste",
+      "tableHeaders": {
+        "model": "Modell",
+        "cost": "Kostnad",
+        "load": "Last",
+        "material": "Materiale",
+        "faceFasteners": "Frontfester",
+        "joistFasteners": "Bjelkefester",
+        "edit": "Rediger",
+        "job": "Jobb",
+        "quantity": "Antall",
+        "remove": "Fjern"
+      },
+      "placeholders": {
+        "noResults": "Ingen resultater funnet – plassholder for koblingstabell",
+        "noJobAdded": "Ingen jobb lagt til"
+      },
+      "fastenerTotals": "Totale fester"
+    }
+  }
+  

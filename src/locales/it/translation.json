@@ -1,0 +1,37 @@
+{
+    "userModal": {
+      "role": "Ruolo",
+      "team": "Squadra"
+    },
+    "viewer": {
+      "objectVisibility": "Visibilità oggetti",
+      "carrying": "Portante",
+      "carried": "Portato",
+      "hanger": "Supporto"
+    },
+    "resultsPanel": {
+      "tabs": {
+        "output": "Risultati",
+        "jobList": "Lista lavori"
+      },
+      "addToJobList": "Aggiungi alla lista lavori",
+      "tableHeaders": {
+        "model": "Modello",
+        "cost": "Costo",
+        "load": "Carico",
+        "material": "Materiale",
+        "faceFasteners": "Fissaggi frontali",
+        "joistFasteners": "Fissaggi travi",
+        "edit": "Modifica",
+        "job": "Lavoro",
+        "quantity": "Quantità",
+        "remove": "Rimuovi"
+      },
+      "placeholders": {
+        "noResults": "Nessun risultato trovato – segnaposto per la tabella dei connettori",
+        "noJobAdded": "Nessun lavoro aggiunto"
+      },
+      "fastenerTotals": "Totali fissaggi"
+    }
+  }
+  

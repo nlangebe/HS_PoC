@@ -1,5 +1,6 @@
 import React from "react";
 import { User } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface HeaderProps {
   country: string;
@@ -43,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const flagUrl = countries[country] || countries["USA"];
   const langAcronym = languageAcronymMap[language] || "EN";
-
+  const { t } = useTranslation();
   return (
     <header className="h-12 bg-[#f4f4f4] border-b border-gray-300 flex items-center justify-between px-4 text-sm">
       {/* LEFT: Logo + Menu */}

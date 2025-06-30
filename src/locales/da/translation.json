@@ -1,0 +1,37 @@
+{
+    "userModal": {
+      "role": "Rolle",
+      "team": "Team"
+    },
+    "viewer": {
+      "objectVisibility": "Objektsynlighed",
+      "carrying": "Bærende",
+      "carried": "Båret",
+      "hanger": "Støtte"
+    },
+    "resultsPanel": {
+      "tabs": {
+        "output": "Resultat",
+        "jobList": "Jobliste"
+      },
+      "addToJobList": "Tilføj til jobliste",
+      "tableHeaders": {
+        "model": "Model",
+        "cost": "Omkostning",
+        "load": "Last",
+        "material": "Materiale",
+        "faceFasteners": "Frontfastgørelser",
+        "joistFasteners": "Bjælkefastgørelser",
+        "edit": "Rediger",
+        "job": "Job",
+        "quantity": "Antal",
+        "remove": "Fjern"
+      },
+      "placeholders": {
+        "noResults": "Ingen resultater fundet – pladsholder for forbindelsestabel",
+        "noJobAdded": "Ingen job tilføjet"
+      },
+      "fastenerTotals": "Fastgørelsessummer"
+    }
+  }
+  

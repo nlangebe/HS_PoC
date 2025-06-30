@@ -1,0 +1,37 @@
+{
+    "userModal": {
+      "role": "Rola",
+      "team": "Zespół"
+    },
+    "viewer": {
+      "objectVisibility": "Widoczność obiektów",
+      "carrying": "Niosący",
+      "carried": "Niesiony",
+      "hanger": "Wspornik"
+    },
+    "resultsPanel": {
+      "tabs": {
+        "output": "Wynik",
+        "jobList": "Lista zadań"
+      },
+      "addToJobList": "Dodaj do listy zadań",
+      "tableHeaders": {
+        "model": "Model",
+        "cost": "Koszt",
+        "load": "Obciążenie",
+        "material": "Materiał",
+        "faceFasteners": "Złącza czołowe",
+        "joistFasteners": "Złącza legarowe",
+        "edit": "Edytuj",
+        "job": "Zadanie",
+        "quantity": "Ilość",
+        "remove": "Usuń"
+      },
+      "placeholders": {
+        "noResults": "Brak wyników – miejsce na tabelę łączników",
+        "noJobAdded": "Brak dodanych zadań"
+      },
+      "fastenerTotals": "Suma złączników"
+    }
+  }
+  

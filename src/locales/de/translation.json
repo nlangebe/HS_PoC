@@ -1,0 +1,37 @@
+{
+    "userModal": {
+      "role": "Rolle",
+      "team": "Team"
+    },
+    "viewer": {
+      "objectVisibility": "Objektsichtbarkeit",
+      "carrying": "Tragend",
+      "carried": "Getragen",
+      "hanger": "Halter"
+    },
+    "resultsPanel": {
+      "tabs": {
+        "output": "Ergebnis",
+        "jobList": "Aufgabenliste"
+      },
+      "addToJobList": "Zur Aufgabenliste hinzufügen",
+      "tableHeaders": {
+        "model": "Modell",
+        "cost": "Kosten",
+        "load": "Last",
+        "material": "Material",
+        "faceFasteners": "Frontbefestigungen",
+        "joistFasteners": "Trägerbefestigungen",
+        "edit": "Bearbeiten",
+        "job": "Aufgabe",
+        "quantity": "Menge",
+        "remove": "Entfernen"
+      },
+      "placeholders": {
+        "noResults": "Keine Ergebnisse gefunden – Platzhalter für Verbindungstabelle",
+        "noJobAdded": "Keine Aufgabe hinzugefügt"
+      },
+      "fastenerTotals": "Befestigungssummen"
+    }
+  }
+  
