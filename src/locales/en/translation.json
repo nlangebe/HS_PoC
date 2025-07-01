@@ -1,37 +1,185 @@
 {
-    "userModal": {
-      "role": "Role",
-      "team": "Team"
+  "userModal": {
+    "role": "Role",
+    "team": "Team"
+  },
+  "viewer": {
+    "objectVisibility": "Object Visibility",
+    "carrying": "Carrying",
+    "carried": "Carried",
+    "hanger": "Hanger"
+  },
+  "resultsPanel": {
+    "tabs": {
+      "output": "Output",
+      "jobList": "Job List"
     },
-    "viewer": {
-      "objectVisibility": "Object Visibility",
-      "carrying": "Carrying",
-      "carried": "Carried",
-      "hanger": "Hanger"
+    "addToJobList": "Add to Job list",
+    "tableHeaders": {
+      "model": "Model",
+      "cost": "Cost",
+      "load": "Load",
+      "material": "Material",
+      "faceFasteners": "Face Fasteners",
+      "joistFasteners": "Joist Fasteners",
+      "edit": "Edit",
+      "job": "Job",
+      "quantity": "Quantity",
+      "remove": "Remove"
     },
-    "resultsPanel": {
-      "tabs": {
-        "output": "Output",
-        "jobList": "Job List"
-      },
-      "addToJobList": "Add to Job list",
-      "tableHeaders": {
-        "model": "Model",
-        "cost": "Cost",
-        "load": "Load",
-        "material": "Material",
-        "faceFasteners": "Face Fasteners",
-        "joistFasteners": "Joist Fasteners",
-        "edit": "Edit",
-        "job": "Job",
-        "quantity": "Quantity",
-        "remove": "Remove"
-      },
-      "placeholders": {
-        "noResults": "No results found – placeholder for connector table",
-        "noJobAdded": "No job added yet"
-      },
-      "fastenerTotals": "Fastener Totals"
+    "placeholders": {
+      "noResults": "No results found – placeholder for connector table",
+      "noJobAdded": "No job added yet"
+    },
+    "fastenerTotals": "Fastener Totals"
+  },
+  "appConfigurationModal": {
+    "close": "Close modal",
+    "title": "App Configuration",
+    "countryOfUse": "Country of Use",
+    "countryOfPurchase": "Country of Purchase",
+    "language": "Language",
+    "designStandard": "Design Standard",
+    "designMethod": "Design Method",
+    "designMethodValue": "Limit States Design (LSD)",
+    "unit": "Unit",
+    "unitValue": "Metric"
+  },
+  "parametersPanel": {
+    "inputHeader": "INPUT",
+    "sections": {
+      "connectionType": "Connection Type",
+      "jobSettings": "Job Settings",
+      "headerMember": "Header (Carrying Member)",
+      "joistMember": "Joist (Carried Member)",
+      "hangerOptions": "Hanger Options"
+    },
+    "connectionOptions": {
+      "joist": "Joist (Flush Top)",
+      "truss": "Truss (Flush Bottom)",
+      "multiTruss": "Multi-Truss (Flush Bottom)"
+    },
+    "hangerTypes": {
+      "allTypes": "All Types",
+      "faceMount": "Face Mount",
+      "topFlange": "Top Flange",
+      "concealedFlange": "Concealed Flange"
+    },
+    "loadDurations": {
+      "dead90": "Dead (90)",
+      "floor100": "Floor (100)",
+      "snow115": "Snow (115)",
+      "roof125": "Roof (125)",
+      "quakeWind160": "Quake/Wind (160)",
+      "standardTerm1": "Standard Term 1.00"
+    },
+    "upliftDurations": {
+      "quakeWind160": "Quake/Wind (160)",
+      "normal100": "Normal (100)",
+      "standardTerm1": "Standard Term 1.00",
+      "shortTerm115": "Short Term 1.15",
+      "mediumTerm15": "Medium Term 1.5"
+    },
+    "memberTypes": {
+      "solidSawn": "Solid Sawn",
+      "engineered": "Engineered",
+      "glulam": "Glulam",
+      "laminatedStrandLumber": "Laminated Strand Lumber",
+      "laminatedVeneerLumber": "Laminated Veneer Lumber",
+      "parallelStrandLumber": "Parallel Strand Lumber",
+      "iJoist": "I-Joist",
+      "floorTruss": "Floor Truss",
+      "ledger": "Ledger",
+      "masonryMidWall": "Masonry - Mid-Wall",
+      "masonryTopOfWall": "Masonry - Top-of-Wall",
+      "concrete": "Concrete",
+      "structuralSteel": "Structural Steel",
+      "nailer": "Nailer",
+      "wallSheathedFlush": "Wall, Sheathed Flush",
+      "wallSheathedGap": "Wall, Sheathed Gap",
+      "wallDrywallFlush": "Wall, Drywall Flush",
+      "wallDrywallFlushStud": "Wall, Drywall Flush @ Stud",
+      "wallDrywallGap": "Wall, Drywall Gap"
+    },
+    "lumberSpecies": {
+      "df": "DF (Douglas Fir)",
+      "sp": "SP (Spruce)",
+      "spSouthernPine": "SP (Southern Pine)",
+      "spf": "SPF (Spruce Pine Fir)"
+    },
+    "widths": {
+      "2x": "2x (1 1/2\")",
+      "3x": "3x (2 1/2\")"
+    },
+    "depths": {
+      "6": "6 (5 1/2\")",
+      "8": "8 (7 1/4\")"
+    },
+    "numberOfPlies": {
+      "1": "1",
+      "2": "2",
+      "3": "3"
+    },
+    "labels": {
+      "hangerType": "Hanger Type",
+      "loadDuration": "Load Duration",
+      "upliftDuration": "Uplift Duration",
+      "jobId": "Job ID",
+      "quantity": "Quantity",
+      "memberType": "Member Type",
+      "lumberSpecies": "Lumber Species",
+      "width": "Width",
+      "depth": "Depth",
+      "numberOfPlies": "Number of Plies",
+      "memberId": "Member ID",
+      "roughSawn": "Rough Sawn",
+      "slopeSkewCalculator": "Slope & Skew Calculator",
+      "offsetDirection": "Offset Direction",
+      "highLowCenter": "High, Low, Center Flush",
+      "downloadedASD": "Downloaded (ASD)",
+      "upliftASD": "Uplift (ASD)",
+      "headerMember": "Header (Carrying Member)",
+      "joistMember": "Joist (Carried Member)",
+      "topFlangeBend": "Top Flange Bend (Degrees)",
+      "topFlangeSlope": "Top Flange Slope (Degrees)",
+      "skewDegrees": "Skew (Degrees)",
+      "slopeDegrees": "Slope (Degrees)"
+    },
+    "offsetDirectionOptions": {
+      "centeredNoOffset": "Centered (No Offset)",
+      "leftFlushRight": "Left (Flush Right)",
+      "rightFlushLeft": "Right (Flush Left)"
+    },
+    "highLowCenterOptions": {
+      "center": "Center",
+      "high": "High",
+      "low": "Low"
+    },
+    "tooltips": {
+      "loadDuration": "Duration of load adjustments as specified by the code are as follows:\n\"STANDARD TERM\" - (K~d~ = 1.00) design loads where the condition exceeds short term, but is less than long-term. For example snow, live loads and dead loads in combination.",
+      "upliftDuration": "Duration of load adjustments:\n\"SHORT TERM\" – (K_d = 1.15): design loads where the condition is not expected to last more than 7 days continuously or cumulatively. Earthquake and wind loads are considered short term.\n\"STANDARD TERM\" – (K_d = 1.00): loads exceeding short term but less than long term. Example: snow, live loads, dead loads in combination.",
+      "memberType": "Select member type",
+      "roughSawn": "Rough Sawn finish info"
     }
+  },
+  "buttons": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "add": "Add",
+    "remove": "Remove"
+  },
+  "errors": {
+    "invalidQuantity": "Invalid quantity entered",
+    "missingJobId": "Job ID is required",
+    "loadOutOfRange": "Load value out of acceptable range"
+  },
+  "notifications": {
+    "savedSuccess": "Settings saved successfully",
+    "jobAdded": "Job added to list"
+  },
+  "placeholders": {
+    "searchConnectors": "Search connectors...",
+    "enterQuantity": "Enter quantity"
   }
-  
+}

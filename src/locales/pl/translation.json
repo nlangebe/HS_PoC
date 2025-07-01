@@ -1,37 +1,165 @@
 {
-    "userModal": {
-      "role": "Rola",
-      "team": "Zespół"
+  "userModal": {
+    "role": "Rola",
+    "team": "Zespół"
+  },
+  "viewer": {
+    "objectVisibility": "Widoczność obiektu",
+    "carrying": "Niosący",
+    "carried": "Noszony",
+    "hanger": "Zawieszenie"
+  },
+  "resultsPanel": {
+    "tabs": {
+      "output": "Wynik",
+      "jobList": "Lista zadań"
     },
-    "viewer": {
-      "objectVisibility": "Widoczność obiektów",
-      "carrying": "Niosący",
-      "carried": "Niesiony",
-      "hanger": "Wspornik"
+    "addToJobList": "Dodaj do listy zadań",
+    "tableHeaders": {
+      "model": "Model",
+      "cost": "Koszt",
+      "load": "Obciążenie",
+      "material": "Materiał",
+      "faceFasteners": "Mocowanie na powierzchni",
+      "joistFasteners": "Mocowanie na belce",
+      "edit": "Edytuj",
+      "job": "Zadanie",
+      "quantity": "Ilość",
+      "remove": "Usuń"
     },
-    "resultsPanel": {
-      "tabs": {
-        "output": "Wynik",
-        "jobList": "Lista zadań"
-      },
-      "addToJobList": "Dodaj do listy zadań",
-      "tableHeaders": {
-        "model": "Model",
-        "cost": "Koszt",
-        "load": "Obciążenie",
-        "material": "Materiał",
-        "faceFasteners": "Złącza czołowe",
-        "joistFasteners": "Złącza legarowe",
-        "edit": "Edytuj",
-        "job": "Zadanie",
-        "quantity": "Ilość",
-        "remove": "Usuń"
-      },
-      "placeholders": {
-        "noResults": "Brak wyników – miejsce na tabelę łączników",
-        "noJobAdded": "Brak dodanych zadań"
-      },
-      "fastenerTotals": "Suma złączników"
+    "placeholders": {
+      "noResults": "Brak wyników – zastępczy tekst dla tabeli łączników",
+      "noJobAdded": "Brak dodanych zadań"
+    },
+    "fastenerTotals": "Suma elementów złącznych"
+  },
+  "appConfigurationModal": {
+    "close": "Zamknij okno",
+    "title": "Konfiguracja aplikacji",
+    "countryOfUse": "Kraj użytkowania",
+    "countryOfPurchase": "Kraj zakupu",
+    "language": "Język",
+    "designStandard": "Standard projektowy",
+    "designMethod": "Metoda projektowa",
+    "designMethodValue": "Projektowanie stanów granicznych (LSD)",
+    "unit": "Jednostka",
+    "unitValue": "Metryczny"
+  },
+  "parametersPanel": {
+    "inputHeader": "WEJŚCIE",
+    "sections": {
+      "connectionType": "Typ połączenia",
+      "jobSettings": "Ustawienia zadania",
+      "headerMember": "Nadproże (element nośny)",
+      "joistMember": "Dźwigar (element nośny)",
+      "hangerOptions": "Opcje zawieszenia"
+    },
+    "connectionOptions": {
+      "joist": "Dźwigar (góra na równi)",
+      "truss": "Kratownica (dół na równi)",
+      "multiTruss": "Wielokrotna kratownica (dół na równi)"
+    },
+    "hangerTypes": {
+      "allTypes": "Wszystkie typy",
+      "faceMount": "Montaż na powierzchni",
+      "topFlange": "Górna flansza",
+      "concealedFlange": "Ukryta flansza"
+    },
+    "loadDurations": {
+      "dead90": "Stałe (90)",
+      "floor100": "Podłoga (100)",
+      "snow115": "Śnieg (115)",
+      "roof125": "Dach (125)",
+      "quakeWind160": "Trzęsienie/wiatr (160)",
+      "standardTerm1": "Standardowy termin 1,00"
+    },
+    "upliftDurations": {
+      "quakeWind160": "Trzęsienie/wiatr (160)",
+      "normal100": "Normalny (100)",
+      "standardTerm1": "Standardowy termin 1,00",
+      "shortTerm115": "Krótki termin 1,15",
+      "mediumTerm15": "Średni termin 1,5"
+    },
+    "memberTypes": {
+      "solidSawn": "Lite drewno",
+      "engineered": "Inżynierowane",
+      "glulam": "Drewno klejone warstwowo",
+      "laminatedStrandLumber": "Drewno laminowane pasmowo",
+      "laminatedVeneerLumber": "Drewno fornirowane laminowane",
+      "parallelStrandLumber": "Drewno z równoległych pasm",
+      "iJoist": "Dźwigar I",
+      "floorTruss": "Kratownica podłogowa",
+      "ledger": "Belka podtrzymująca",
+      "masonryMidWall": "Mur - ściana środkowa",
+      "masonryTopOfWall": "Mur - góra ściany",
+      "concrete": "Beton",
+      "structuralSteel": "Stal konstrukcyjna",
+      "nailer": "Listwa gwoździowa",
+      "wallSheathedFlush": "Ściana, obłożona na równo",
+      "wallSheathedGap": "Ściana, obłożona z przerwą",
+      "wallDrywallFlush": "Ściana, płyta kartonowo-gipsowa na równo",
+      "wallDrywallFlushStud": "Ściana, płyta kartonowo-gipsowa na równo do słupków",
+      "wallDrywallGap": "Ściana, płyta kartonowo-gipsowa z przerwą"
+    },
+    "lumberSpecies": {
+      "df": "DF (Daglezja)",
+      "sp": "SP (Świerk)",
+      "spSouthernPine": "SP (Sosna południowa)",
+      "spf": "SPF (Świerk, sosna, jodła)"
+    },
+    "widths": {
+      "2x": "2x (1 1/2\")",
+      "3x": "3x (2 1/2\")"
+    },
+    "depths": {
+      "6": "6 (5 1/2\")",
+      "8": "8 (7 1/4\")"
+    },
+    "numberOfPlies": {
+      "1": "1",
+      "2": "2",
+      "3": "3"
+    },
+    "labels": {
+      "hangerType": "Typ zawieszenia",
+      "loadDuration": "Czas obciążenia",
+      "upliftDuration": "Czas unoszenia",
+      "jobId": "ID zadania",
+      "quantity": "Ilość",
+      "memberType": "Typ elementu",
+      "lumberSpecies": "Gatunek drewna",
+      "width": "Szerokość",
+      "depth": "Głębokość",
+      "numberOfPlies": "Liczba warstw",
+      "memberId": "ID elementu",
+      "roughSawn": "Rough Sawn",
+      "slopeSkewCalculator": "Kalkulator nachylenia i przesunięcia",
+      "offsetDirection": "Kierunek przesunięcia",
+      "highLowCenter": "Wysoki, niski, wyrównany na środku",
+      "downloadedASD": "Pobrano (ASD)",
+      "upliftASD": "Uniesienie (ASD)",
+      "headerMember": "Nadproże (element nośny)",
+      "joistMember": "Dźwigar (element nośny)",
+      "topFlangeBend": "Zgięcie górnej flanszy (stopnie)",
+      "topFlangeSlope": "Nachylenie górnej flanszy (stopnie)",
+      "skewDegrees": "Skrzywienie (stopnie)",
+      "slopeDegrees": "Nachylenie (stopnie)"
+    },
+    "offsetDirectionOptions": {
+      "centeredNoOffset": "Wyśrodkowane (bez przesunięcia)",
+      "leftFlushRight": "Lewo (wyrównane do prawej)",
+      "rightFlushLeft": "Prawo (wyrównane do lewej)"
+    },
+    "highLowCenterOptions": {
+      "center": "Środek",
+      "high": "Wysoki",
+      "low": "Niski"
+    },
+    "tooltips": {
+      "loadDuration": "Czas trwania korekt obciążenia zgodnie z normą:\n\"STANDARDOWY TERMIN\" - (K~d~ = 1,00) obciążenia projektowe, gdzie stan przekracza krótkoterminowy, ale jest poniżej długoterminowego. Na przykład śnieg, obciążenia żywe i martwe w kombinacji.",
+      "upliftDuration": "Czas trwania korekt unoszenia:\n\"KRÓTKI TERMIN\" – (K_d = 1,15): obciążenia projektowe, gdzie stan nie przewiduje trwania ponad 7 dni ciągłych lub łącznie. Trzęsienia ziemi i wiatr traktowane jako krótkoterminowe.\n\"STANDARDOWY TERMIN\" – (K_d = 1,00): obciążenia przekraczające krótkoterminowe, ale poniżej długoterminowego. Przykład: śnieg, obciążenia żywe, martwe w kombinacji.",
+      "memberType": "Wybierz typ elementu",
+      "roughSawn": "Informacje o wykończeniu Rough Sawn"
     }
   }
-  
+}

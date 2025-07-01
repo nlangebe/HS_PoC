@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SplitPane from "react-split-pane";
 import "./index.css";
 import ParametersPanel from "./ParametersPanel";
@@ -8,7 +8,7 @@ import Header from "./Header";
 import AppConfigurationModal from "./AppConfigurationModal";
 import UserModal from "./UserModal";
 import SlopeAndSkewCalculator from "./SlopeAndSkewCalculator";
-
+import i18n from "./i18n";
 
 // ✅ Datasets by Country
 const usaResults = [
@@ -290,16 +290,17 @@ const otherResults = [
   },
 ];
 
-// ✅ Dataset selection helper
+// Dataset selection helper
 const getResultsForCountry = (country: string) => {
   if (country === "USA") return usaResults;
   if (country === "Canada") return canadianResults;
-  return otherResults; // All other countries (EU, UK, etc)
+  return otherResults;
 };
 
 const App: React.FC = () => {
+  // Use language codes matching your i18n setup
   const [country, setCountry] = useState("USA");
-  const [language, setLanguage] = useState("English");
+  const [language, setLanguage] = useState(i18n.language);
 
   const [params, setParams] = useState({
     type: "",
@@ -342,6 +343,13 @@ const App: React.FC = () => {
     setResults(getResultsForCountry(country));
   };
 
+  // Sync i18n language whenever language state changes
+  useEffect(() => {
+    if (language !== i18n.language) {
+      i18n.changeLanguage(language);
+    }
+  }, [language]);
+
   return (
     <div className="App h-screen flex flex-col">
       <Header
@@ -365,6 +373,7 @@ const App: React.FC = () => {
               onSearch={search}
               country={country}
               onOpenSlopeSkewModal={() => setIsSlopeModalOpen(true)}
+              language={language}
             />
           </div>
 
@@ -389,9 +398,9 @@ const App: React.FC = () => {
         <AppConfigurationModal
           onClose={handleAppConfigClose}
           countryOfUse={country}
-          setCountryOfUse={handleCountryChange} // Immediate update on selection
-          language={language}
-          setLanguage={setLanguage}
+          setCountryOfUse={handleCountryChange} // immediate update on selection
+          language={language} // pass current language state
+          setLanguage={setLanguage} // immediate update on language select
         />
       )}
 

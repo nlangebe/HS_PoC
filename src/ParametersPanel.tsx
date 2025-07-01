@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TrussImg from "/Images/Truss.png";
 import JoistImg from "/Images/Joist.png";
 import MultiTrussImg from "/Images/Multi-Truss.png";
@@ -18,6 +18,12 @@ interface Parameters {
   numberOfPlies: string;
   memberId: string;
   lumberFinishRoughSawn: boolean;
+  skew?: number;
+  slope?: number;
+  topFlangeBend?: number;
+  topFlangeSlope?: number;
+  offsetDirection?: string;
+  highLowCenter?: string;
 }
 
 interface ParametersPanelProps {
@@ -25,13 +31,14 @@ interface ParametersPanelProps {
   setParams: any;
   onSearch: () => void;
   country: string;
-  onOpenSlopeSkewModal: () => void; // ✅ this line
+  onOpenSlopeSkewModal: () => void;
+  language?: string;
 }
 
 interface SkewSlopeSliderProps {
   title: string;
-  min: number;
-  max: number;
+  min?: number;
+  max?: number;
   value: number;
   onChange: (v: number) => void;
   marks?: number[];
@@ -39,8 +46,8 @@ interface SkewSlopeSliderProps {
 
 const SkewSlopeSlider: React.FC<SkewSlopeSliderProps> = ({
   title,
-  min,
-  max,
+  min = 0,
+  max = 100,
   value,
   onChange,
   marks = [],
@@ -50,7 +57,7 @@ const SkewSlopeSlider: React.FC<SkewSlopeSliderProps> = ({
 
   return (
     <label className="flex flex-col w-full select-none">
-      <span className="font-semibold mb-1 text-sm">{title}</span>
+      <span className="font-semibold mb-1 text-sm">{t(title)}</span>
 
       <div className="flex items-center gap-4">
         <input
@@ -105,13 +112,15 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
   country,
   onOpenSlopeSkewModal,
 }) => {
+  const { t } = useTranslation();
+
   // Manage collapsible sections open/close state
   const [openSections, setOpenSections] = useState({
     connectionType: true,
     jobSettings: true,
     headerMember: true,
     joistMember: true,
-    hangerOptions: true, // initially closed
+    hangerOptions: false, // initially closed
   });
 
   const toggleSection = (section: keyof typeof openSections) => {
@@ -120,21 +129,23 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
 
   // Fixed hanger types for all countries
   const hangerTypes = [
-    "All Types",
-    "Face Mount",
-    "Top Flange",
-    "Concealed Flange",
+    t("parametersPanel.hangerTypes.allTypes"),
+    t("parametersPanel.hangerTypes.faceMount"),
+    t("parametersPanel.hangerTypes.topFlange"),
+    t("parametersPanel.hangerTypes.concealedFlange"),
   ];
 
   // Load Duration options based on country
   const usaLoadDurations = [
-    "Dead (90)",
-    "Floor (100)",
-    "Snow (115)",
-    "Roof (125)",
-    "Quake/Wind (160)",
+    t("parametersPanel.loadDurations.dead90"),
+    t("parametersPanel.loadDurations.floor100"),
+    t("parametersPanel.loadDurations.snow115"),
+    t("parametersPanel.loadDurations.roof125"),
+    t("parametersPanel.loadDurations.quakeWind160"),
   ];
-  const canadaLoadDurations = ["Standard Term 1.00"];
+  const canadaLoadDurations = [
+    t("parametersPanel.loadDurations.standardTerm1"),
+  ];
 
   // Determine options and disabled status dynamically
   const isCanada = country === "Canada";
@@ -146,40 +157,27 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
     ? canadaLoadDurations
     : usaLoadDurations; // fallback to USA options for other countries
 
-  // Reset load duration if current value no longer valid for selected country
-  useEffect(() => {
-    if (!loadDurationOptions.includes(params.downloadDuration)) {
-      setParams((prev) => ({
-        ...prev,
-        downloadDuration: loadDurationOptions[0],
-      }));
-    }
-  }, [country]);
-
-  // Other dropdown options
   const upliftDurations = isUSA
-    ? ["Quake/Wind (160)", "Normal (100)"]
+    ? [
+        t("parametersPanel.upliftDurations.quakeWind160"),
+        t("parametersPanel.upliftDurations.normal100"),
+      ]
     : isCanada
-    ? ["Standard Term 1.00", "Short Term 1.15"]
-    : ["Short Term 1.15", "Medium Term 1.5"]; // fallback
-
-  const memberTypes = ["Solid Sawn", "Engineered"];
-  const lumberSpecies = [
-    "DF (Douglas Fir)",
-    "SP (Spruce)",
-    "SP (Southern Pine)",
-    "SPF(Spurce Pine Fir)",
-  ];
-  const widths = ['2x (1 1/2")', '3x (2 1/2")'];
-  const depths = ['6 (5 1/2")', '8 (7 1/4")'];
-  const numberOfPlies = ["1", "2", "3"];
+    ? [
+        t("parametersPanel.upliftDurations.standardTerm1"),
+        t("parametersPanel.upliftDurations.shortTerm115"),
+      ]
+    : [
+        t("parametersPanel.upliftDurations.shortTerm115"),
+        t("parametersPanel.upliftDurations.mediumTerm15"),
+      ];
 
   return (
     <div className="max-h-[calc(100vh+20px)] overflow-y-auto px-4 pb-20">
       <div className="text-xs font-sans">
         {/* INPUT Header */}
         <div className="uppercase font-bold text-gray-600 mb-2 tracking-wide">
-          INPUT
+          {t("parametersPanel.inputHeader")}
         </div>
 
         {/* CONNECTION TYPE */}
@@ -189,7 +187,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
             onClick={() => toggleSection("connectionType")}
           >
             <span className="font-semibold uppercase text-orange-700 tracking-wide">
-              Connection Type
+              {t("parametersPanel.sections.connectionType")}
             </span>
             <span className="text-orange-700 text-lg">
               {openSections.connectionType ? "▼" : "▶"}
@@ -198,15 +196,19 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
           {openSections.connectionType && (
             <div className="p-3 grid grid-cols-3 gap-2">
               {[
-                { key: "Joist", label: "Joist (Flush Top)", image: JoistImg },
+                {
+                  key: "Joist",
+                  label: t("parametersPanel.connectionOptions.joist"),
+                  image: JoistImg,
+                },
                 {
                   key: "Truss",
-                  label: "Truss (Flush Bottom)",
+                  label: t("parametersPanel.connectionOptions.truss"),
                   image: TrussImg,
                 },
                 {
                   key: "Multi-Truss",
-                  label: "Multi-Truss (Flush Bottom)",
+                  label: t("parametersPanel.connectionOptions.multiTruss"),
                   image: MultiTrussImg,
                 },
               ].map((opt) => {
@@ -215,7 +217,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                   <button
                     key={opt.key}
                     onClick={() =>
-                      setParams({ ...params, connectionType: opt.key as any })
+                      setParams({ ...params, connectionType: opt.key })
                     }
                     className={`relative flex flex-col items-center justify-center rounded p-2 text-center transition ${
                       isSelected
@@ -249,7 +251,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
             onClick={() => toggleSection("jobSettings")}
           >
             <span className="font-semibold uppercase text-orange-700 tracking-wide">
-              Job Settings
+              {t("parametersPanel.sections.jobSettings")}
             </span>
             <span className="text-orange-700 text-lg">
               {openSections.jobSettings ? "▼" : "▶"}
@@ -257,11 +259,10 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
           </header>
           {openSections.jobSettings && (
             <div className="p-3 grid grid-cols-2 gap-3">
-              {/* Hanger Type - REMOVE '?' */}
+              {/* Hanger Type */}
               <label className="flex flex-col">
                 <span className="font-semibold mb-1 flex items-center">
-                  Hanger Type
-                  {/* Removed the '?' icon here */}
+                  {t("parametersPanel.labels.hangerType")}
                 </span>
                 <select
                   value={params.hangerType}
@@ -278,23 +279,17 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                 </select>
               </label>
 
-              {/* Load Duration (tooltip fix applied) */}
+              {/* Load Duration */}
               <label className="flex flex-col">
                 <span className="font-semibold mb-1 flex items-center">
-                  Load Duration
+                  {t("parametersPanel.labels.loadDuration")}
                   <span className="ml-1 text-gray-400 cursor-help relative group">
                     ?
                     <div
                       className="absolute left-1/2 -translate-x-1/2 mt-1 w-72 bg-white border border-gray-400 rounded p-2 text-[10px] text-gray-900 shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto z-50"
                       role="tooltip"
                     >
-                      Duration of load adjustments as specified by the code are
-                      as follows:
-                      <br />
-                      <b>"STANDARD TERM"</b> - (K~d~ = 1.00) design loads where
-                      the condition exceeds short term, but is less than
-                      long-term. For example snow, live loads and dead loads in
-                      combination.
+                      {t("parametersPanel.tooltips.loadDuration")}
                     </div>
                   </span>
                 </span>
@@ -318,39 +313,17 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                 </select>
               </label>
 
-              {/* Uplift Duration (tooltip fix applied) */}
+              {/* Uplift Duration */}
               <label className="flex flex-col relative">
                 <span className="font-semibold mb-1 flex items-center">
-                  Uplift Duration
+                  {t("parametersPanel.labels.upliftDuration")}
                   <span className="ml-1 text-gray-400 cursor-help relative group">
                     ?
                     <div
-                      className="absolute z-50 top-full left-0 mt-1 w-[18rem] max-w-[90vw] 
-                              bg-white border border-gray-400 rounded p-2 shadow-xl 
-                              text-[10px] text-gray-900 
-                              opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
+                      className="absolute z-50 top-full left-0 mt-1 w-[18rem] max-w-[90vw] bg-white border border-gray-400 rounded p-2 shadow-xl text-[10px] text-gray-900 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
                       role="tooltip"
                     >
-                      <div className="font-semibold mb-1">
-                        Duration of load adjustments:
-                      </div>
-                      <div className="mb-1">
-                        <b>"SHORT TERM"</b> – (
-                        <i>
-                          K<sub>d</sub> = 1.15
-                        </i>
-                        ): design loads where the condition is not expected to
-                        last more than 7 days continuously or cumulatively.
-                        Earthquake and wind loads are considered short term.
-                      </div>
-                      <div>
-                        <b>"STANDARD TERM"</b> – (
-                        <i>
-                          K<sub>d</sub> = 1.00
-                        </i>
-                        ): loads exceeding short term but less than long term.
-                        Example: snow, live loads, dead loads in combination.
-                      </div>
+                      {t("parametersPanel.tooltips.upliftDuration")}
                     </div>
                   </span>
                 </span>
@@ -371,10 +344,12 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
 
               {/* Job ID */}
               <label className="flex flex-col">
-                <span className="font-semibold mb-1">Job ID</span>
+                <span className="font-semibold mb-1">
+                  {t("parametersPanel.labels.jobId")}
+                </span>
                 <input
                   type="text"
-                  value={params.jobId || "Job 1"}
+                  value={params.jobId || "Job 1"} // "Job 1" as default placeholder
                   onChange={(e) =>
                     setParams({ ...params, jobId: e.target.value })
                   }
@@ -384,7 +359,9 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
 
               {/* Quantity */}
               <label className="flex flex-col col-span-2">
-                <span className="font-semibold mb-1">Quantity</span>
+                <span className="font-semibold mb-1">
+                  {t("parametersPanel.labels.quantity")}
+                </span>
                 <input
                   type="number"
                   min={1}
@@ -406,7 +383,7 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
             onClick={() => toggleSection("headerMember")}
           >
             <span className="font-semibold uppercase text-orange-700 tracking-wide">
-              Header (Carrying Member)
+              {t("parametersPanel.sections.headerMember")}
             </span>
             <span className="text-orange-700 text-lg">
               {openSections.headerMember ? "▼" : "▶"}
@@ -417,10 +394,10 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
               {/* Member Type */}
               <label className="flex flex-col">
                 <span className="font-semibold mb-1 flex items-center">
-                  Member Type
+                  {t("parametersPanel.labels.memberType")}
                   <span
                     className="ml-1 text-gray-400 cursor-help"
-                    title="Select member type"
+                    title={t("parametersPanel.tooltips.memberType")}
                   >
                     ?
                   </span>
@@ -433,27 +410,30 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                   className="border border-gray-300 rounded px-2 py-1 text-xs"
                 >
                   {[
-                    "Solid Sawn",
-                    "Glulam",
-                    "Laminated Strand Lumber",
-                    "Laminated Veneer Lumber",
-                    "Parallel Strand Lumber",
-                    "I-Joist",
-                    "Floor Truss",
-                    "Ledger",
-                    "Masonry - Mid-Wall",
-                    "Masonry - Top-of-Wall",
-                    "Concrete",
-                    "Structural Steel",
-                    "Nailer",
-                    "Wall, Sheathed Flush",
-                    "Wall, Sheathed Gap",
-                    "Wall, Drywall Flush",
-                    "Wall, Drywall Flush @ Stud",
-                    "Wall, Drywall Gap",
-                  ].map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
+                    "solidSawn",
+                    "glulam",
+                    "laminatedStrandLumber",
+                    "laminatedVeneerLumber",
+                    "parallelStrandLumber",
+                    "iJoist",
+                    "floorTruss",
+                    "ledger",
+                    "masonryMidWall",
+                    "masonryTopOfWall",
+                    "concrete",
+                    "structuralSteel",
+                    "nailer",
+                    "wallSheathedFlush",
+                    "wallSheathedGap",
+                    "wallDrywallFlush",
+                    "wallDrywallFlushStud",
+                    "wallDrywallGap",
+                  ].map((key) => (
+                    <option
+                      key={key}
+                      value={t(`parametersPanel.memberTypes.${key}`)}
+                    >
+                      {t(`parametersPanel.memberTypes.${key}`)}
                     </option>
                   ))}
                 </select>
@@ -461,7 +441,9 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
 
               {/* Lumber Species */}
               <label className="flex flex-col">
-                <span className="font-semibold mb-1">Lumber Species</span>
+                <span className="font-semibold mb-1">
+                  {t("parametersPanel.labels.lumberSpecies")}
+                </span>
                 <select
                   value={params.lumberSpecies}
                   onChange={(e) =>
@@ -469,14 +451,12 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                   }
                   className="border border-gray-300 rounded px-2 py-1 text-xs"
                 >
-                  {[
-                    "DF (Douglas Fir)",
-                    "SP (Spruce)",
-                    "SP (Southern Pine)",
-                    "SPF(Spurce Pine Fir)",
-                  ].map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
+                  {["df", "sp", "spSouthernPine", "spf"].map((key) => (
+                    <option
+                      key={key}
+                      value={t(`parametersPanel.lumberSpecies.${key}`)}
+                    >
+                      {t(`parametersPanel.lumberSpecies.${key}`)}
                     </option>
                   ))}
                 </select>
@@ -484,7 +464,9 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
 
               {/* Width */}
               <label className="flex flex-col">
-                <span className="font-semibold mb-1">Width</span>
+                <span className="font-semibold mb-1">
+                  {t("parametersPanel.labels.width")}
+                </span>
                 <select
                   value={params.width}
                   onChange={(e) =>
@@ -492,9 +474,12 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                   }
                   className="border border-gray-300 rounded px-2 py-1 text-xs"
                 >
-                  {['2x (1 1/2")', '3x (2 1/2")'].map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
+                  {["2x", "3x"].map((key) => (
+                    <option
+                      key={key}
+                      value={t(`parametersPanel.widths.${key}`)}
+                    >
+                      {t(`parametersPanel.widths.${key}`)}
                     </option>
                   ))}
                 </select>
@@ -502,7 +487,9 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
 
               {/* Depth */}
               <label className="flex flex-col">
-                <span className="font-semibold mb-1">Depth</span>
+                <span className="font-semibold mb-1">
+                  {t("parametersPanel.labels.depth")}
+                </span>
                 <select
                   value={params.depth}
                   onChange={(e) =>
@@ -510,9 +497,12 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                   }
                   className="border border-gray-300 rounded px-2 py-1 text-xs"
                 >
-                  {['6 (5 1/2")', '8 (7 1/4")'].map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
+                  {["6", "8"].map((key) => (
+                    <option
+                      key={key}
+                      value={t(`parametersPanel.depths.${key}`)}
+                    >
+                      {t(`parametersPanel.depths.${key}`)}
                     </option>
                   ))}
                 </select>
@@ -520,7 +510,9 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
 
               {/* Number of Plies */}
               <label className="flex flex-col">
-                <span className="font-semibold mb-1">Number of Plies</span>
+                <span className="font-semibold mb-1">
+                  {t("parametersPanel.labels.numberOfPlies")}
+                </span>
                 <select
                   value={params.numberOfPlies}
                   onChange={(e) =>
@@ -528,9 +520,9 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                   }
                   className="border border-gray-300 rounded px-2 py-1 text-xs"
                 >
-                  {["1", "2", "3"].map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
+                  {["1", "2", "3"].map((key) => (
+                    <option key={key} value={key}>
+                      {t(`parametersPanel.numberOfPlies.${key}`)}
                     </option>
                   ))}
                 </select>
@@ -538,7 +530,9 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
 
               {/* Member ID */}
               <label className="flex flex-col">
-                <span className="font-semibold mb-1">Member ID</span>
+                <span className="font-semibold mb-1">
+                  {t("parametersPanel.labels.memberId")}
+                </span>
                 <input
                   type="text"
                   value={params.memberId || "Joist 1"}
@@ -549,8 +543,8 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                 />
               </label>
 
-              {/* Lumber Finish (checkbox) */}
-              <label className="flex items-center col-span-2 mt-1 space-x-2 cursor-pointer select-none">
+              {/* Rough Sawn Lumber */}
+              <label className="flex items-center gap-2 col-span-2 mt-2">
                 <input
                   type="checkbox"
                   checked={params.lumberFinishRoughSawn}
@@ -560,107 +554,62 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
                       lumberFinishRoughSawn: e.target.checked,
                     })
                   }
-                  className="w-4 h-4"
                 />
-                <span className="text-xs">Rough Sawn</span>
-                <span
-                  title="Rough Sawn finish info"
-                  className="text-gray-400 cursor-help text-xs"
-                >
-                  ?
+                <span className="text-xs">
+                  {t("parametersPanel.labels.roughSawnLumber")}
                 </span>
               </label>
             </div>
           )}
         </section>
 
-        {/* JOIST (CARRIED MEMBER) */}
-        <section className="mb-4 border border-orange-300 rounded">
-          <header
-            className="flex justify-between items-center bg-orange-100 px-3 py-1 cursor-pointer select-none"
-            onClick={() => toggleSection("joistMember")}
-          >
-            <span className="font-semibold uppercase text-orange-700 tracking-wide">
-              Joist (Carried Member)
-            </span>
-            <span className="text-orange-700 text-lg">
-              {openSections.joistMember ? "▼" : "▶"}
-            </span>
-          </header>
-          {openSections.joistMember && (
-            <div className="p-3 grid grid-cols-2 gap-3">
-              <label className="flex flex-col">
-                <span className="font-semibold mb-1">Member Type</span>
-                <select className="border border-gray-300 rounded px-2 py-1 text-xs">
-                  <option>Solid Sawn</option>
-                  <option>Glulam</option>
-                  <option>Laminated Strand Lumber</option>
-                  <option>Laminated Veneer Lumber</option>
-                  <option>Parallel Strand Lumber</option>
-                  <option>I-Joist</option>
-                  <option>Floor Truss</option>
-                </select>
-              </label>
-              <label className="flex flex-col">
-                <span className="font-semibold mb-1">Lumber Species</span>
-                <select className="border border-gray-300 rounded px-2 py-1 text-xs">
-                  <option>DF (Douglas Fir)</option>
-                  <option>SP (Spruce)</option>
-                  <option>SP (Southern Pine)</option>
-                  <option>SPF(Spurce Pine Fir)</option>
-                </select>
-              </label>
-              <label className="flex flex-col">
-                <span className="font-semibold mb-1">Width</span>
-                <select className="border border-gray-300 rounded px-2 py-1 text-xs">
-                  <option>2x (1 1/2")</option>
-                  <option>3x (2 1/2")</option>
-                </select>
-              </label>
-              <label className="flex flex-col">
-                <span className="font-semibold mb-1">Depth</span>
-                <select className="border border-gray-300 rounded px-2 py-1 text-xs">
-                  <option>6 (5 1/2")</option>
-                  <option>8 (7 1/4")</option>
-                </select>
-              </label>
-              <label className="flex flex-col">
-                <span className="font-semibold mb-1">Downloaded (ASD)</span>
-                <input
-                  type="number"
-                  className="border border-gray-300 rounded px-2 py-1 text-xs"
-                  value={0}
-                />
-              </label>
-              <label className="flex flex-col">
-                <span className="font-semibold mb-1">Uplift (ASD)</span>
-                <input
-                  type="number"
-                  className="border border-gray-300 rounded px-2 py-1 text-xs"
-                  value={0}
-                />
-              </label>
-              <label className="flex flex-col col-span-2">
-                <span className="font-semibold mb-1">Member ID</span>
-                <input
-                  type="text"
-                  className="border border-gray-300 rounded px-2 py-1 text-xs"
-                  value="Joist 1"
-                />
-              </label>
-              <label className="flex items-center col-span-2 space-x-2 cursor-pointer select-none">
-                <input type="checkbox" className="w-4 h-4" />
-                <span className="text-xs">Rough Sawn</span>
-                <span
-                  title="Rough Sawn finish info"
-                  className="text-gray-400 cursor-help text-xs"
+        {/* JOIST MEMBER (when connectionType is Joist) */}
+        {params.connectionType === "Joist" && (
+          <section className="mb-4 border border-orange-300 rounded">
+            <header
+              className="flex justify-between items-center bg-orange-100 px-3 py-1 cursor-pointer select-none"
+              onClick={() => toggleSection("joistMember")}
+            >
+              <span className="font-semibold uppercase text-orange-700 tracking-wide">
+                {t("parametersPanel.sections.joistMember")}
+              </span>
+              <span className="text-orange-700 text-lg">
+                {openSections.joistMember ? "▼" : "▶"}
+              </span>
+            </header>
+            {openSections.joistMember && (
+              <div className="p-3 grid grid-cols-1 gap-4">
+                {/* Slope and Skew button */}
+                <button
+                  onClick={onOpenSlopeSkewModal}
+                  className="rounded bg-orange-400 hover:bg-orange-500 text-white px-2 py-1 w-full"
                 >
-                  ?
-                </span>
-              </label>
-            </div>
-          )}
-        </section>
+                  {t("parametersPanel.labels.slopeSkewButton")}
+                </button>
+
+                {/* Slope */}
+                <SkewSlopeSlider
+                  title="parametersPanel.labels.slope"
+                  min={-45}
+                  max={45}
+                  value={params.slope ?? 0}
+                  onChange={(v) => setParams({ ...params, slope: v })}
+                  marks={[-45, -30, -15, 0, 15, 30, 45]}
+                />
+
+                {/* Skew */}
+                <SkewSlopeSlider
+                  title="parametersPanel.labels.skew"
+                  min={-45}
+                  max={45}
+                  value={params.skew ?? 0}
+                  onChange={(v) => setParams({ ...params, skew: v })}
+                  marks={[-45, -30, -15, 0, 15, 30, 45]}
+                />
+              </div>
+            )}
+          </section>
+        )}
 
         {/* HANGER OPTIONS */}
         <section className="mb-4 border border-orange-300 rounded">
@@ -669,93 +618,83 @@ const ParametersPanel: React.FC<ParametersPanelProps> = ({
             onClick={() => toggleSection("hangerOptions")}
           >
             <span className="font-semibold uppercase text-orange-700 tracking-wide">
-              Hanger Options
+              {t("parametersPanel.sections.hangerOptions")}
             </span>
             <span className="text-orange-700 text-lg">
               {openSections.hangerOptions ? "▼" : "▶"}
             </span>
           </header>
-
           {openSections.hangerOptions && (
-            <div className="p-3 space-y-4">
-              <div
-                className="inline-block bg-orange-600 text-white text-xs px-4 py-1 rounded font-bold cursor-pointer select-none"
-                onClick={onOpenSlopeSkewModal}
-              >
-                Slope & Skew Calculator
-              </div>
+            <div className="p-3 grid grid-cols-1 gap-3">
+              {/* Top Flange Bend */}
+              <SkewSlopeSlider
+                title="parametersPanel.labels.topFlangeBend"
+                min={-45}
+                max={45}
+                value={params.topFlangeBend ?? 0}
+                onChange={(v) => setParams({ ...params, topFlangeBend: v })}
+                marks={[-45, -30, -15, 0, 15, 30, 45]}
+              />
 
-              <div className="space-y-6">
-                {/* Skew */}
-                <SkewSlopeSlider
-                  title="Skew (Degrees)"
-                  value={params.skew}
-                  onChange={(v) => setParams({ ...params, skew: v })}
-                />
+              {/* Top Flange Slope */}
+              <SkewSlopeSlider
+                title="parametersPanel.labels.topFlangeSlope"
+                min={-45}
+                max={45}
+                value={params.topFlangeSlope ?? 0}
+                onChange={(v) => setParams({ ...params, topFlangeSlope: v })}
+                marks={[-45, -30, -15, 0, 15, 30, 45]}
+              />
 
-                {/* Slope */}
-                <SkewSlopeSlider
-                  title="Slope (Degrees)"
-                  min={-49}
-                  max={49}
-                  value={params.slope}
-                  onChange={(v) => setParams({ ...params, slope: v })}
-                />
+              {/* Offset Direction */}
+              <label className="flex flex-col">
+                <span className="font-semibold mb-1">
+                  {t("parametersPanel.labels.offsetDirection")}
+                </span>
+                <select
+                  value={params.offsetDirection ?? ""}
+                  onChange={(e) =>
+                    setParams({ ...params, offsetDirection: e.target.value })
+                  }
+                  className="border border-gray-300 rounded px-2 py-1 text-xs"
+                >
+                  <option value="">
+                    {t(
+                      "parametersPanel.offsetDirectionOptions.centeredNoOffset"
+                    )}
+                  </option>
+                  <option value="Left">
+                    {t("parametersPanel.offsetDirectionOptions.rightFlushLeft")}
+                  </option>
+                  <option value="Right">
+                    {t("parametersPanel.offsetDirectionOptions.leftFlushRight")}
+                  </option>
+                </select>
+              </label>
 
-                {/* Top Flange Bend */}
-                <SkewSlopeSlider
-                  title="Top Flange Bend (Degrees)"
-                  min={-30}
-                  max={30}
-                  value={params.topFlangeBend ?? 0}
-                  onChange={(v) => setParams({ ...params, topFlangeBend: v })}
-                />
-
-                {/* Top Flange Slope */}
-                <SkewSlopeSlider
-                  title="Top Flange Slope (Degrees)"
-                  min={-35}
-                  max={35}
-                  value={params.topFlangeSlope ?? 0}
-                  onChange={(v) => setParams({ ...params, topFlangeSlope: v })}
-                />
-
-                {/* Offset Direction */}
-                <label className="flex flex-col">
-                  <span className="font-semibold mb-1 text-sm">
-                    Offset Direction
-                  </span>
-                  <select
-                    className="border border-gray-300 rounded px-2 py-1 text-xs"
-                    value={params.offsetDirection ?? "Centered (No Offset)"}
-                    onChange={(e) =>
-                      setParams({ ...params, offsetDirection: e.target.value })
-                    }
-                  >
-                    <option>Centered (No Offset)</option>
-                    <option>Left (Flush Right)</option>
-                    <option>Right (Flush Left)</option>
-                  </select>
-                </label>
-
-                {/* High, Low, Center Flush */}
-                <label className="flex flex-col">
-                  <span className="font-semibold mb-1 text-sm">
-                    High, Low, Center Flush
-                  </span>
-                  <select
-                    className="border border-gray-300 rounded px-2 py-1 text-xs"
-                    value={params.highLowCenter ?? "Center"}
-                    onChange={(e) =>
-                      setParams({ ...params, highLowCenter: e.target.value })
-                    }
-                  >
-                    <option>Center</option>
-                    <option>High</option>
-                    <option>Low</option>
-                  </select>
-                </label>
-              </div>
+              {/* High-Low Center */}
+              <label className="flex flex-col">
+                <span className="font-semibold mb-1">
+                  {t("parametersPanel.labels.highLowCenter")}
+                </span>
+                <select
+                  value={params.highLowCenter ?? ""}
+                  onChange={(e) =>
+                    setParams({ ...params, highLowCenter: e.target.value })
+                  }
+                  className="border border-gray-300 rounded px-2 py-1 text-xs"
+                >
+                  <option value="Center">
+                    {t("parametersPanel.highLowCenterOptions.center")}
+                  </option>
+                  <option value="High">
+                    {t("parametersPanel.highLowCenterOptions.high")}
+                  </option>
+                  <option value="Low">
+                    {t("parametersPanel.highLowCenterOptions.low")}
+                  </option>
+                </select>
+              </label>
             </div>
           )}
         </section>

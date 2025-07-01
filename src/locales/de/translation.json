@@ -1,37 +1,185 @@
 {
-    "userModal": {
-      "role": "Rolle",
-      "team": "Team"
+  "userModal": {
+    "role": "Rolle",
+    "team": "Team"
+  },
+  "viewer": {
+    "objectVisibility": "Objekt Sichtbarkeit",
+    "carrying": "Tragend",
+    "carried": "Getragen",
+    "hanger": "Aufhänger"
+  },
+  "resultsPanel": {
+    "tabs": {
+      "output": "Ausgabe",
+      "jobList": "Jobliste"
     },
-    "viewer": {
-      "objectVisibility": "Objektsichtbarkeit",
-      "carrying": "Tragend",
-      "carried": "Getragen",
-      "hanger": "Halter"
+    "addToJobList": "Zur Jobliste hinzufügen",
+    "tableHeaders": {
+      "model": "Modell",
+      "cost": "Kosten",
+      "load": "Last",
+      "material": "Material",
+      "faceFasteners": "Frontbefestigungen",
+      "joistFasteners": "Balkenbefestigungen",
+      "edit": "Bearbeiten",
+      "job": "Job",
+      "quantity": "Menge",
+      "remove": "Entfernen"
     },
-    "resultsPanel": {
-      "tabs": {
-        "output": "Ergebnis",
-        "jobList": "Aufgabenliste"
-      },
-      "addToJobList": "Zur Aufgabenliste hinzufügen",
-      "tableHeaders": {
-        "model": "Modell",
-        "cost": "Kosten",
-        "load": "Last",
-        "material": "Material",
-        "faceFasteners": "Frontbefestigungen",
-        "joistFasteners": "Trägerbefestigungen",
-        "edit": "Bearbeiten",
-        "job": "Aufgabe",
-        "quantity": "Menge",
-        "remove": "Entfernen"
-      },
-      "placeholders": {
-        "noResults": "Keine Ergebnisse gefunden – Platzhalter für Verbindungstabelle",
-        "noJobAdded": "Keine Aufgabe hinzugefügt"
-      },
-      "fastenerTotals": "Befestigungssummen"
+    "placeholders": {
+      "noResults": "Keine Ergebnisse gefunden – Platzhalter für Verbindungstabelle",
+      "noJobAdded": "Noch kein Job hinzugefügt"
+    },
+    "fastenerTotals": "Befestigungssummen"
+  },
+  "appConfigurationModal": {
+    "close": "Modal schließen",
+    "title": "App-Konfiguration",
+    "countryOfUse": "Verwendungsland",
+    "countryOfPurchase": "Kauf-Land",
+    "language": "Sprache",
+    "designStandard": "Designstandard",
+    "designMethod": "Designmethode",
+    "designMethodValue": "Grenzzustandsbemessung (LSD)",
+    "unit": "Einheit",
+    "unitValue": "Metrisch"
+  },
+  "parametersPanel": {
+    "inputHeader": "EINGABE",
+    "sections": {
+      "connectionType": "Verbindungstyp",
+      "jobSettings": "Job-Einstellungen",
+      "headerMember": "Träger (tragendes Element)",
+      "joistMember": "Balken (getragenes Element)",
+      "hangerOptions": "Aufhänger-Optionen"
+    },
+    "connectionOptions": {
+      "joist": "Balken (Flush oben)",
+      "truss": "Sparren (Flush unten)",
+      "multiTruss": "Mehrfach-Sparren (Flush unten)"
+    },
+    "hangerTypes": {
+      "allTypes": "Alle Typen",
+      "faceMount": "Frontmontage",
+      "topFlange": "Obere Flansch",
+      "concealedFlange": "Verdeckte Flansch"
+    },
+    "loadDurations": {
+      "dead90": "Tote Last (90)",
+      "floor100": "Boden (100)",
+      "snow115": "Schnee (115)",
+      "roof125": "Dach (125)",
+      "quakeWind160": "Erdbeben/Wind (160)",
+      "standardTerm1": "Standard Begriff 1.00"
+    },
+    "upliftDurations": {
+      "quakeWind160": "Erdbeben/Wind (160)",
+      "normal100": "Normal (100)",
+      "standardTerm1": "Standard Begriff 1.00",
+      "shortTerm115": "Kurzfristig 1.15",
+      "mediumTerm15": "Mittelfristig 1.5"
+    },
+    "memberTypes": {
+      "solidSawn": "Massiv gesägt",
+      "engineered": "Konstruiert",
+      "glulam": "Brettschichtholz",
+      "laminatedStrandLumber": "Lamelliertes Streifenholz",
+      "laminatedVeneerLumber": "Laminiertes Furnierholz",
+      "parallelStrandLumber": "Paralleles Streifenholz",
+      "iJoist": "I-Träger",
+      "floorTruss": "Bodenbindersystem",
+      "ledger": "Auflager",
+      "masonryMidWall": "Mauerwerk - Mittlere Wand",
+      "masonryTopOfWall": "Mauerwerk - Obere Wand",
+      "concrete": "Beton",
+      "structuralSteel": "Stahlbau",
+      "nailer": "Nagelbrett",
+      "wallSheathedFlush": "Wand, bündig beplankt",
+      "wallSheathedGap": "Wand, beplankt mit Spalt",
+      "wallDrywallFlush": "Wand, Gipskarton bündig",
+      "wallDrywallFlushStud": "Wand, Gipskarton bündig an Ständer",
+      "wallDrywallGap": "Wand, Gipskarton mit Spalt"
+    },
+    "lumberSpecies": {
+      "df": "DF (Douglasie)",
+      "sp": "SP (Fichte)",
+      "spSouthernPine": "SP (Südpine)",
+      "spf": "SPF (Fichte Kiefer Tanne)"
+    },
+    "widths": {
+      "2x": "2x (1 1/2\")",
+      "3x": "3x (2 1/2\")"
+    },
+    "depths": {
+      "6": "6 (5 1/2\")",
+      "8": "8 (7 1/4\")"
+    },
+    "numberOfPlies": {
+      "1": "1",
+      "2": "2",
+      "3": "3"
+    },
+    "labels": {
+      "hangerType": "Aufhänger Typ",
+      "loadDuration": "Belastungsdauer",
+      "upliftDuration": "Abhebedauer",
+      "jobId": "Job ID",
+      "quantity": "Menge",
+      "memberType": "Elementtyp",
+      "lumberSpecies": "Holzart",
+      "width": "Breite",
+      "depth": "Tiefe",
+      "numberOfPlies": "Anzahl der Lagen",
+      "memberId": "Element-ID",
+      "roughSawn": "Rough Sawn",
+      "slopeSkewCalculator": "Neigungs- & Schrägberechner",
+      "offsetDirection": "Versatz Richtung",
+      "highLowCenter": "Hoch, Niedrig, Mitte bündig",
+      "downloadedASD": "Heruntergeladen (ASD)",
+      "upliftASD": "Abheben (ASD)",
+      "headerMember": "Träger (tragendes Element)",
+      "joistMember": "Balken (getragenes Element)",
+      "topFlangeBend": "Obere Flansch-Biegung (Grad)",
+      "topFlangeSlope": "Obere Flansch-Neigung (Grad)",
+      "skewDegrees": "Schräglage (Grad)",
+      "slopeDegrees": "Neigung (Grad)"
+    },
+    "offsetDirectionOptions": {
+      "centeredNoOffset": "Zentriert (kein Versatz)",
+      "leftFlushRight": "Links (Flush rechts)",
+      "rightFlushLeft": "Rechts (Flush links)"
+    },
+    "highLowCenterOptions": {
+      "center": "Mitte",
+      "high": "Hoch",
+      "low": "Niedrig"
+    },
+    "tooltips": {
+      "loadDuration": "Dauer der Belastungsanpassungen laut Code:\n\"STANDARD TERM\" - (K~d~ = 1.00) Designlasten, bei denen die Bedingung kurzfristig überschritten, aber nicht langfristig ist. Zum Beispiel Schnee, Nutzlasten und kombinierte Tote Lasten.",
+      "upliftDuration": "Dauer der Abhebeanpassungen:\n\"KURZFRISTIG\" – (K_d = 1.15): Designlasten, bei denen die Bedingung nicht länger als 7 Tage kontinuierlich oder kumulativ erwartet wird. Erdbeben und Wind gelten als kurzfristig.\n\"STANDARD TERM\" – (K_d = 1.00): Lasten, die kurzfristig überschreiten, aber unter langfristig liegen. Beispiel: Schnee, Nutzlasten, Tote Lasten in Kombination.",
+      "memberType": "Elementtyp auswählen",
+      "roughSawn": "Informationen zur Rough Sawn-Oberfläche"
     }
+  },
+  "buttons": {
+    "submit": "Senden",
+    "cancel": "Abbrechen",
+    "reset": "Zurücksetzen",
+    "add": "Hinzufügen",
+    "remove": "Entfernen"
+  },
+  "errors": {
+    "invalidQuantity": "Ungültige Menge eingegeben",
+    "missingJobId": "Job-ID ist erforderlich",
+    "loadOutOfRange": "Lastwert außerhalb des zulässigen Bereichs"
+  },
+  "notifications": {
+    "savedSuccess": "Einstellungen erfolgreich gespeichert",
+    "jobAdded": "Job zur Liste hinzugefügt"
+  },
+  "placeholders": {
+    "searchConnectors": "Verbinder suchen...",
+    "enterQuantity": "Menge eingeben"
   }
-  
+}

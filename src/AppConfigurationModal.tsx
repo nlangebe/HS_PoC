@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface AppConfigurationModalProps {
   onClose: () => void;
@@ -24,21 +25,22 @@ const countries = [
   "Australia",
 ];
 
+// Map countries to language codes (matching your i18n codes)
 const countryLanguageMap: Record<string, string> = {
-  USA: "English",
-  Canada: "English",
-  "United Kingdom": "English",
-  Australia: "English",
-  "New Zealand": "English",
-  France: "French",
-  Germany: "German",
-  Poland: "Polish",
-  Italy: "Italian",
-  Austria: "German",
-  Sweden: "Swedish",
-  Norway: "Norwegian",
-  Denmark: "Danish",
-  "": "English", // fallback
+  USA: "en",
+  Canada: "en",
+  "United Kingdom": "en",
+  Australia: "en",
+  "New Zealand": "en",
+  France: "fr",
+  Germany: "de",
+  Poland: "pl",
+  Italy: "it",
+  Austria: "de",
+  Sweden: "sv",
+  Norway: "no",
+  Denmark: "da",
+  "": "en", // fallback
 };
 
 const euCountries = [
@@ -53,6 +55,17 @@ const euCountries = [
   "United Kingdom",
 ];
 
+const languageDisplayMap: Record<string, string> = {
+  en: "English",
+  fr: "French",
+  de: "German",
+  it: "Italian",
+  no: "Norwegian",
+  sv: "Swedish",
+  pl: "Polish",
+  da: "Danish",
+};
+
 const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
   onClose,
   countryOfUse,
@@ -61,6 +74,7 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
   setLanguage,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const { t, i18n } = useTranslation();
 
   // Track if language was manually changed by user to avoid auto overwrite
   const [languageManuallyChanged, setLanguageManuallyChanged] = useState(false);
@@ -93,15 +107,23 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
   // When country changes, reset language to default for country,
   // and reset manual override flag (so language updates accordingly)
   useEffect(() => {
-    const autoLang = countryLanguageMap[countryOfUse] || "English";
-    setLanguage(autoLang);
-    setLanguageManuallyChanged(false);
-  }, [countryOfUse, setLanguage]);
+    if (!languageManuallyChanged) {
+      const autoLang = countryLanguageMap[countryOfUse] || "en";
+      setLanguage(autoLang);
+      i18n.changeLanguage(autoLang);
+    }
+  }, [countryOfUse, languageManuallyChanged, setLanguage, i18n]);
+
+  // Update i18n language when language state changes
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language, i18n]);
 
   // Handle manual language change by user
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setLanguage(e.target.value);
-    setLanguageManuallyChanged(true);
+    const newLang = e.target.value;
+    setLanguage(newLang); // Update app state and i18n
+    setLanguageManuallyChanged(true); // Mark manual override
   };
 
   // Design Standard logic
@@ -124,22 +146,27 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-600 hover:text-black text-xl"
-          aria-label="Close modal"
+          aria-label={t("appConfigurationModal.close")}
         >
           ×
         </button>
 
-        <h2 className="text-lg font-semibold mb-4">App Configuration</h2>
+        <h2 className="text-lg font-semibold mb-4">
+          {t("appConfigurationModal.title")}
+        </h2>
 
         <div className="grid grid-cols-5 gap-4 items-center text-sm">
           {/* Country of Use */}
           <label htmlFor="useCountry" className="col-span-1 font-medium">
-            Country of Use
+            {t("appConfigurationModal.countryOfUse")}
           </label>
           <select
             id="useCountry"
             value={countryOfUse}
-            onChange={(e) => setCountryOfUse(e.target.value)}
+            onChange={(e) => {
+              setCountryOfUse(e.target.value);
+              setLanguageManuallyChanged(false); // reset manual override to allow auto lang update
+            }}
             className="col-span-4 border border-gray-300 rounded px-2 py-1 w-full"
           >
             {countries.map((c) => (
@@ -151,7 +178,7 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
 
           {/* Country of Purchase */}
           <label htmlFor="purchaseCountry" className="col-span-1 font-medium">
-            Country of Purchase
+            {t("appConfigurationModal.countryOfPurchase")}
           </label>
           <select
             id="purchaseCountry"
@@ -169,7 +196,7 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
 
           {/* Language */}
           <label htmlFor="language" className="col-span-1 font-medium">
-            Language
+            {t("Language")}
           </label>
           <select
             id="language"
@@ -177,17 +204,17 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
             onChange={handleLanguageChange}
             className="col-span-4 border border-gray-300 rounded px-2 py-1 w-full"
           >
-            {Array.from(new Set(Object.values(countryLanguageMap))).map(
-              (lang) => (
-                <option key={lang} value={lang}>
-                  {lang}
-                </option>
-              )
-            )}
+            {Object.entries(languageDisplayMap).map(([code, name]) => (
+              <option key={code} value={code}>
+                {name}
+              </option>
+            ))}
           </select>
 
           {/* Design Standard */}
-          <label className="col-span-1 font-medium">Design Standard</label>
+          <label className="col-span-1 font-medium">
+            {t("appConfigurationModal.designStandard")}
+          </label>
           <input
             type="text"
             className="col-span-4 border border-gray-300 rounded px-2 py-1 w-full text-gray-500 bg-gray-100"
@@ -196,20 +223,24 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
           />
 
           {/* Design Method */}
-          <label className="col-span-1 font-medium">Design Method</label>
+          <label className="col-span-1 font-medium">
+            {t("appConfigurationModal.designMethod")}
+          </label>
           <input
             type="text"
             className="col-span-4 border border-gray-300 rounded px-2 py-1 w-full text-gray-500 bg-gray-100"
-            value="Limit States Design (LSD)"
+            value={t("appConfigurationModal.designMethodValue")}
             disabled
           />
 
           {/* Unit */}
-          <label className="col-span-1 font-medium">Unit</label>
+          <label className="col-span-1 font-medium">
+            {t("appConfigurationModal.unit")}
+          </label>
           <input
             type="text"
             className="col-span-4 border border-gray-300 rounded px-2 py-1 w-full text-gray-500 bg-gray-100"
-            value="Metric"
+            value={t("appConfigurationModal.unitValue")}
             disabled
           />
         </div>

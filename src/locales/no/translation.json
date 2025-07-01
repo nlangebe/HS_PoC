@@ -1,37 +1,165 @@
 {
-    "userModal": {
-      "role": "Rolle",
-      "team": "Team"
+  "userModal": {
+    "role": "Rolle",
+    "team": "Team"
+  },
+  "viewer": {
+    "objectVisibility": "Objekt Synlighet",
+    "carrying": "Bærende",
+    "carried": "Båret",
+    "hanger": "Oppheng"
+  },
+  "resultsPanel": {
+    "tabs": {
+      "output": "Resultat",
+      "jobList": "Jobbliste"
     },
-    "viewer": {
-      "objectVisibility": "Objektsynlighet",
-      "carrying": "Bærende",
-      "carried": "Båret",
-      "hanger": "Støtte"
+    "addToJobList": "Legg til i jobbliste",
+    "tableHeaders": {
+      "model": "Modell",
+      "cost": "Kostnad",
+      "load": "Last",
+      "material": "Materiale",
+      "faceFasteners": "Feste på flate",
+      "joistFasteners": "Feste på bjelke",
+      "edit": "Rediger",
+      "job": "Jobb",
+      "quantity": "Antall",
+      "remove": "Fjern"
     },
-    "resultsPanel": {
-      "tabs": {
-        "output": "Resultat",
-        "jobList": "Jobbliste"
-      },
-      "addToJobList": "Legg til i jobbliste",
-      "tableHeaders": {
-        "model": "Modell",
-        "cost": "Kostnad",
-        "load": "Last",
-        "material": "Materiale",
-        "faceFasteners": "Frontfester",
-        "joistFasteners": "Bjelkefester",
-        "edit": "Rediger",
-        "job": "Jobb",
-        "quantity": "Antall",
-        "remove": "Fjern"
-      },
-      "placeholders": {
-        "noResults": "Ingen resultater funnet – plassholder for koblingstabell",
-        "noJobAdded": "Ingen jobb lagt til"
-      },
-      "fastenerTotals": "Totale fester"
+    "placeholders": {
+      "noResults": "Ingen resultater funnet – plassholder for koblingstabell",
+      "noJobAdded": "Ingen jobb lagt til ennå"
+    },
+    "fastenerTotals": "Totalt antall festemidler"
+  },
+  "appConfigurationModal": {
+    "close": "Lukk modal",
+    "title": "App-konfigurasjon",
+    "countryOfUse": "Bruksland",
+    "countryOfPurchase": "Kjøpsland",
+    "language": "Språk",
+    "designStandard": "Designstandard",
+    "designMethod": "Designmetode",
+    "designMethodValue": "Grenseverdidesign (LSD)",
+    "unit": "Enhet",
+    "unitValue": "Metrisk"
+  },
+  "parametersPanel": {
+    "inputHeader": "INNPUTT",
+    "sections": {
+      "connectionType": "Koblingstype",
+      "jobSettings": "Jobbinnstillinger",
+      "headerMember": "Bærende medlem",
+      "joistMember": "Bjelke medlem",
+      "hangerOptions": "Opphengsalternativer"
+    },
+    "connectionOptions": {
+      "joist": "Bjelke (flush topp)",
+      "truss": "Sperre (flush bunn)",
+      "multiTruss": "Multi-sperre (flush bunn)"
+    },
+    "hangerTypes": {
+      "allTypes": "Alle typer",
+      "faceMount": "Frontmontert",
+      "topFlange": "Toppflens",
+      "concealedFlange": "Skjult flens"
+    },
+    "loadDurations": {
+      "dead90": "Død (90)",
+      "floor100": "Gulv (100)",
+      "snow115": "Snø (115)",
+      "roof125": "Tak (125)",
+      "quakeWind160": "Jordskjelv/Vind (160)",
+      "standardTerm1": "Standard termin 1,00"
+    },
+    "upliftDurations": {
+      "quakeWind160": "Jordskjelv/Vind (160)",
+      "normal100": "Normal (100)",
+      "standardTerm1": "Standard termin 1,00",
+      "shortTerm115": "Kort termin 1,15",
+      "mediumTerm15": "Mellomlang termin 1,5"
+    },
+    "memberTypes": {
+      "solidSawn": "Heltre",
+      "engineered": "Konstruert",
+      "glulam": "Limtre",
+      "laminatedStrandLumber": "Laminerte strenger",
+      "laminatedVeneerLumber": "Laminerte finerplater",
+      "parallelStrandLumber": "Parallelle strenger",
+      "iJoist": "I-bjelke",
+      "floorTruss": "Gulvsperre",
+      "ledger": "Støttelist",
+      "masonryMidWall": "Murverk - Midtvegg",
+      "masonryTopOfWall": "Murverk - Toppen av vegg",
+      "concrete": "Betong",
+      "structuralSteel": "Strukturstål",
+      "nailer": "Spikerlist",
+      "wallSheathedFlush": "Veg, kledd flush",
+      "wallSheathedGap": "Veg, kledd med mellomrom",
+      "wallDrywallFlush": "Veg, gips flush",
+      "wallDrywallFlushStud": "Veg, gips flush på stendere",
+      "wallDrywallGap": "Veg, gips med mellomrom"
+    },
+    "lumberSpecies": {
+      "df": "DF (Douglasgran)",
+      "sp": "SP (Gran)",
+      "spSouthernPine": "SP (Sørlig furu)",
+      "spf": "SPF (Gran-Furu-Fir)"
+    },
+    "widths": {
+      "2x": "2x (1 1/2\")",
+      "3x": "3x (2 1/2\")"
+    },
+    "depths": {
+      "6": "6 (5 1/2\")",
+      "8": "8 (7 1/4\")"
+    },
+    "numberOfPlies": {
+      "1": "1",
+      "2": "2",
+      "3": "3"
+    },
+    "labels": {
+      "hangerType": "Opphengstype",
+      "loadDuration": "Lastvarighet",
+      "upliftDuration": "Oppdriftsvarighet",
+      "jobId": "Jobb-ID",
+      "quantity": "Antall",
+      "memberType": "Medlemstype",
+      "lumberSpecies": "Treslag",
+      "width": "Bredde",
+      "depth": "Dybde",
+      "numberOfPlies": "Antall lag",
+      "memberId": "Medlems-ID",
+      "roughSawn": "Rough Sawn",
+      "slopeSkewCalculator": "Helnings- og skjevhetskalkulator",
+      "offsetDirection": "Offset-retning",
+      "highLowCenter": "Høy, lav, flush senter",
+      "downloadedASD": "Nedlastet (ASD)",
+      "upliftASD": "Oppdrift (ASD)",
+      "headerMember": "Bærende medlem",
+      "joistMember": "Bjelke medlem",
+      "topFlangeBend": "Bøyning toppflens (grader)",
+      "topFlangeSlope": "Helning toppflens (grader)",
+      "skewDegrees": "Skjevhet (grader)",
+      "slopeDegrees": "Helning (grader)"
+    },
+    "offsetDirectionOptions": {
+      "centeredNoOffset": "Sentral (ingen offset)",
+      "leftFlushRight": "Venstre (flush høyre)",
+      "rightFlushLeft": "Høyre (flush venstre)"
+    },
+    "highLowCenterOptions": {
+      "center": "Senter",
+      "high": "Høy",
+      "low": "Lav"
+    },
+    "tooltips": {
+      "loadDuration": "Varighet av lastjusteringer som spesifisert av koden:\n\"STANDARD TERM\" - (K~d~ = 1.00) designlaster hvor tilstanden overstiger kort sikt, men er under lang sikt. For eksempel snø, levende last og dødlaster kombinert.",
+      "upliftDuration": "Varighet av oppdriftsjusteringer:\n\"KORT SIKT\" – (K_d = 1.15): designlaster hvor tilstanden ikke forventes å vare mer enn 7 dager kontinuerlig eller kumulativt. Jordskjelv og vind betraktes som kort sikt.\n\"STANDARD TERM\" – (K_d = 1.00): laster som overstiger kort sikt, men er under lang sikt. Eksempel: snø, levende last, dødlaster kombinert.",
+      "memberType": "Velg medlemstype",
+      "roughSawn": "Informasjon om Rough Sawn-finish"
     }
   }
-  
+}

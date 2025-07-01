@@ -1,37 +1,165 @@
 {
-    "userModal": {
-      "role": "Rôle",
-      "team": "Équipe"
+  "userModal": {
+    "role": "Rôle",
+    "team": "Équipe"
+  },
+  "viewer": {
+    "objectVisibility": "Visibilité des objets",
+    "carrying": "Portant",
+    "carried": "Porté",
+    "hanger": "Connecteur"
+  },
+  "resultsPanel": {
+    "tabs": {
+      "output": "Résultats",
+      "jobList": "Liste des travaux"
     },
-    "viewer": {
-      "objectVisibility": "Visibilité des objets",
-      "carrying": "Portant",
-      "carried": "Porté",
-      "hanger": "Support"
+    "addToJobList": "Ajouter à la liste des travaux",
+    "tableHeaders": {
+      "model": "Modèle",
+      "cost": "Coût",
+      "load": "Charge",
+      "material": "Matériau",
+      "faceFasteners": "Fixations Face",
+      "joistFasteners": "Fixations Solive",
+      "edit": "Modifier",
+      "job": "Travail",
+      "quantity": "Quantité",
+      "remove": "Supprimer"
     },
-    "resultsPanel": {
-      "tabs": {
-        "output": "Résultats",
-        "jobList": "Liste des tâches"
-      },
-      "addToJobList": "Ajouter à la liste des tâches",
-      "tableHeaders": {
-        "model": "Modèle",
-        "cost": "Coût",
-        "load": "Charge",
-        "material": "Matériau",
-        "faceFasteners": "Fixations de face",
-        "joistFasteners": "Fixations de solive",
-        "edit": "Éditer",
-        "job": "Tâche",
-        "quantity": "Quantité",
-        "remove": "Supprimer"
-      },
-      "placeholders": {
-        "noResults": "Aucun résultat trouvé – espace réservé pour la table des connecteurs",
-        "noJobAdded": "Aucune tâche ajoutée"
-      },
-      "fastenerTotals": "Totaux des fixations"
+    "placeholders": {
+      "noResults": "Aucun résultat trouvé – espace réservé pour le tableau des connecteurs",
+      "noJobAdded": "Aucun travail ajouté pour le moment"
+    },
+    "fastenerTotals": "Total des fixations"
+  },
+  "appConfigurationModal": {
+    "close": "Fermer la fenêtre",
+    "title": "Configuration de l'application",
+    "countryOfUse": "Pays d'utilisation",
+    "countryOfPurchase": "Pays d'achat",
+    "language": "Langue",
+    "designStandard": "Norme de conception",
+    "designMethod": "Méthode de conception",
+    "designMethodValue": "Conception aux états limites (LSD)",
+    "unit": "Unité",
+    "unitValue": "Métrique"
+  },
+  "parametersPanel": {
+    "inputHeader": "ENTRÉE",
+    "sections": {
+      "connectionType": "Type de connexion",
+      "jobSettings": "Paramètres du travail",
+      "headerMember": "Poutre porteuse (élément porteur)",
+      "joistMember": "Solive (élément porté)",
+      "hangerOptions": "Options du connecteur"
+    },
+    "connectionOptions": {
+      "joist": "Solive (bord supérieur affleurant)",
+      "truss": "Ferme (bord inférieur affleurant)",
+      "multiTruss": "Multi-Ferme (bord inférieur affleurant)"
+    },
+    "hangerTypes": {
+      "allTypes": "Tous types",
+      "faceMount": "Montage face",
+      "topFlange": "Bride supérieure",
+      "concealedFlange": "Bride cachée"
+    },
+    "loadDurations": {
+      "dead90": "Mort (90)",
+      "floor100": "Plancher (100)",
+      "snow115": "Neige (115)",
+      "roof125": "Toit (125)",
+      "quakeWind160": "Séisme/vent (160)",
+      "standardTerm1": "Terme standard 1.00"
+    },
+    "upliftDurations": {
+      "quakeWind160": "Séisme/vent (160)",
+      "normal100": "Normal (100)",
+      "standardTerm1": "Terme standard 1.00",
+      "shortTerm115": "Terme court 1.15",
+      "mediumTerm15": "Terme moyen 1.5"
+    },
+    "memberTypes": {
+      "solidSawn": "Scié massif",
+      "engineered": "Ingénierie",
+      "glulam": "Bois lamellé-collé",
+      "laminatedStrandLumber": "Bois lamellé à brins",
+      "laminatedVeneerLumber": "Bois lamellé à placages",
+      "parallelStrandLumber": "Bois à brins parallèles",
+      "iJoist": "I-Solive",
+      "floorTruss": "Ferme de plancher",
+      "ledger": "Solive d’appui",
+      "masonryMidWall": "Maçonnerie - Mur intermédiaire",
+      "masonryTopOfWall": "Maçonnerie - Sommet du mur",
+      "concrete": "Béton",
+      "structuralSteel": "Acier structurel",
+      "nailer": "Support de clouage",
+      "wallSheathedFlush": "Mur, parement affleurant",
+      "wallSheathedGap": "Mur, parement avec espace",
+      "wallDrywallFlush": "Mur, plaque de plâtre affleurante",
+      "wallDrywallFlushStud": "Mur, plaque de plâtre affleurante @ montants",
+      "wallDrywallGap": "Mur, plaque de plâtre avec espace"
+    },
+    "lumberSpecies": {
+      "df": "DF (Douglas-Fir)",
+      "sp": "SP (Épinette)",
+      "spSouthernPine": "SP (Pin du Sud)",
+      "spf": "SPF (Épinette-Pin-Fer)"
+    },
+    "widths": {
+      "2x": "2x (1 1/2\")",
+      "3x": "3x (2 1/2\")"
+    },
+    "depths": {
+      "6": "6 (5 1/2\")",
+      "8": "8 (7 1/4\")"
+    },
+    "numberOfPlies": {
+      "1": "1",
+      "2": "2",
+      "3": "3"
+    },
+    "labels": {
+      "hangerType": "Type de connecteur",
+      "loadDuration": "Durée de charge",
+      "upliftDuration": "Durée de soulèvement",
+      "jobId": "ID du travail",
+      "quantity": "Quantité",
+      "memberType": "Type d’élément",
+      "lumberSpecies": "Essence de bois",
+      "width": "Largeur",
+      "depth": "Profondeur",
+      "numberOfPlies": "Nombre de plis",
+      "memberId": "ID de l’élément",
+      "roughSawn": "Scié brut",
+      "slopeSkewCalculator": "Calculateur de pente et biais",
+      "offsetDirection": "Direction du décalage",
+      "highLowCenter": "Haut, Bas, Centre affleurant",
+      "downloadedASD": "Téléchargé (ASD)",
+      "upliftASD": "Soulèvement (ASD)",
+      "headerMember": "Poutre porteuse (élément porteur)",
+      "joistMember": "Solive (élément porté)",
+      "topFlangeBend": "Courbure bride supérieure (degrés)",
+      "topFlangeSlope": "Pente bride supérieure (degrés)",
+      "skewDegrees": "Biais (degrés)",
+      "slopeDegrees": "Pente (degrés)"
+    },
+    "offsetDirectionOptions": {
+      "centeredNoOffset": "Centré (sans décalage)",
+      "leftFlushRight": "Gauche (affleurant droite)",
+      "rightFlushLeft": "Droite (affleurant gauche)"
+    },
+    "highLowCenterOptions": {
+      "center": "Centre",
+      "high": "Haut",
+      "low": "Bas"
+    },
+    "tooltips": {
+      "loadDuration": "Durée des ajustements de charge selon le code:\n\"TERME STANDARD\" - (K~d~ = 1.00) charges de conception où la condition dépasse le court terme, mais est inférieure au long terme. Par exemple neige, charges d’exploitation et charges permanentes combinées.",
+      "upliftDuration": "Durée des ajustements de charge :\n\"TERME COURT\" – (K_d = 1.15) : charges de conception où la condition ne devrait pas durer plus de 7 jours consécutifs ou cumulés. Les charges sismiques et de vent sont considérées comme de court terme.\n\"TERME STANDARD\" – (K_d = 1.00) : charges dépassant le court terme mais inférieures au long terme. Exemple : neige, charges d’exploitation, charges permanentes combinées.",
+      "memberType": "Sélectionner le type d’élément",
+      "roughSawn": "Informations sur la finition sciée brute"
     }
   }
-  
+}

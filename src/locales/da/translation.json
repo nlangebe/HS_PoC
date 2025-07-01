@@ -1,37 +1,185 @@
 {
-    "userModal": {
-      "role": "Rolle",
-      "team": "Team"
+  "userModal": {
+    "role": "Rolle",
+    "team": "Hold"
+  },
+  "viewer": {
+    "objectVisibility": "Objekt Synlighed",
+    "carrying": "Bærende",
+    "carried": "Båret",
+    "hanger": "Krog"
+  },
+  "resultsPanel": {
+    "tabs": {
+      "output": "Resultat",
+      "jobList": "Jobliste"
     },
-    "viewer": {
-      "objectVisibility": "Objektsynlighed",
-      "carrying": "Bærende",
-      "carried": "Båret",
-      "hanger": "Støtte"
+    "addToJobList": "Tilføj til Jobliste",
+    "tableHeaders": {
+      "model": "Model",
+      "cost": "Pris",
+      "load": "Belastning",
+      "material": "Materiale",
+      "faceFasteners": "Ansigtsbeslag",
+      "joistFasteners": "Bjælke Beslag",
+      "edit": "Rediger",
+      "job": "Job",
+      "quantity": "Antal",
+      "remove": "Fjern"
     },
-    "resultsPanel": {
-      "tabs": {
-        "output": "Resultat",
-        "jobList": "Jobliste"
-      },
-      "addToJobList": "Tilføj til jobliste",
-      "tableHeaders": {
-        "model": "Model",
-        "cost": "Omkostning",
-        "load": "Last",
-        "material": "Materiale",
-        "faceFasteners": "Frontfastgørelser",
-        "joistFasteners": "Bjælkefastgørelser",
-        "edit": "Rediger",
-        "job": "Job",
-        "quantity": "Antal",
-        "remove": "Fjern"
-      },
-      "placeholders": {
-        "noResults": "Ingen resultater fundet – pladsholder for forbindelsestabel",
-        "noJobAdded": "Ingen job tilføjet"
-      },
-      "fastenerTotals": "Fastgørelsessummer"
+    "placeholders": {
+      "noResults": "Ingen resultater fundet – plads til forbindelsestabel",
+      "noJobAdded": "Ingen job tilføjet endnu"
+    },
+    "fastenerTotals": "Beslag Totaler"
+  },
+  "appConfigurationModal": {
+    "close": "Luk modal",
+    "title": "App Konfiguration",
+    "countryOfUse": "Brugsland",
+    "countryOfPurchase": "Købsland",
+    "language": "Sprog",
+    "designStandard": "Design Standard",
+    "designMethod": "Design Metode",
+    "designMethodValue": "Grænsetilstandsdesign (LSD)",
+    "unit": "Enhed",
+    "unitValue": "Metrisk"
+  },
+  "parametersPanel": {
+    "inputHeader": "INDTASTNING",
+    "sections": {
+      "connectionType": "Forbindelsestype",
+      "jobSettings": "Job Indstillinger",
+      "headerMember": "Header (Bærende Medlem)",
+      "joistMember": "Bjælke (Båret Medlem)",
+      "hangerOptions": "Krog Indstillinger"
+    },
+    "connectionOptions": {
+      "joist": "Bjælke (Flush Top)",
+      "truss": "Spær (Flush Bottom)",
+      "multiTruss": "Multi-Spær (Flush Bottom)"
+    },
+    "hangerTypes": {
+      "allTypes": "Alle typer",
+      "faceMount": "Frontmontering",
+      "topFlange": "Topflange",
+      "concealedFlange": "Skjult flange"
+    },
+    "loadDurations": {
+      "dead90": "Død (90)",
+      "floor100": "Gulv (100)",
+      "snow115": "Sne (115)",
+      "roof125": "Tag (125)",
+      "quakeWind160": "Jordskælv/Vind (160)",
+      "standardTerm1": "Standard Term 1.00"
+    },
+    "upliftDurations": {
+      "quakeWind160": "Jordskælv/Vind (160)",
+      "normal100": "Normal (100)",
+      "standardTerm1": "Standard Term 1.00",
+      "shortTerm115": "Kort Term 1.15",
+      "mediumTerm15": "Mellem Term 1.5"
+    },
+    "memberTypes": {
+      "solidSawn": "Massivt Savet",
+      "engineered": "Konstrueret",
+      "glulam": "Limtræ",
+      "laminatedStrandLumber": "Lamineret Strand Træ",
+      "laminatedVeneerLumber": "Lamineret Finér Træ",
+      "parallelStrandLumber": "Parallel Strand Træ",
+      "iJoist": "I-Bjælke",
+      "floorTruss": "Gulvspær",
+      "ledger": "Ledger",
+      "masonryMidWall": "Masonry - Midtvæg",
+      "masonryTopOfWall": "Masonry - Top af væg",
+      "concrete": "Beton",
+      "structuralSteel": "Strukturelt Stål",
+      "nailer": "Nailer",
+      "wallSheathedFlush": "Væg, beklædt flush",
+      "wallSheathedGap": "Væg, beklædt med mellemrum",
+      "wallDrywallFlush": "Væg, gips flush",
+      "wallDrywallFlushStud": "Væg, gips flush ved stolpe",
+      "wallDrywallGap": "Væg, gips med mellemrum"
+    },
+    "lumberSpecies": {
+      "df": "DF (Douglas Fyr)",
+      "sp": "SP (Gran)",
+      "spSouthernPine": "SP (Sydlig Pine)",
+      "spf": "SPF (Gran Fyr)"
+    },
+    "widths": {
+      "2x": "2x (1 1/2\")",
+      "3x": "3x (2 1/2\")"
+    },
+    "depths": {
+      "6": "6 (5 1/2\")",
+      "8": "8 (7 1/4\")"
+    },
+    "numberOfPlies": {
+      "1": "1",
+      "2": "2",
+      "3": "3"
+    },
+    "labels": {
+      "hangerType": "Krog Type",
+      "loadDuration": "Belastnings Varighed",
+      "upliftDuration": "Løfte Varighed",
+      "jobId": "Job ID",
+      "quantity": "Antal",
+      "memberType": "Medlem Type",
+      "lumberSpecies": "Træart",
+      "width": "Bredde",
+      "depth": "Dybde",
+      "numberOfPlies": "Antal Lag",
+      "memberId": "Medlems ID",
+      "roughSawn": "Rough Sawn",
+      "slopeSkewCalculator": "Hældning & Skævhed Beregner",
+      "offsetDirection": "Offset Retning",
+      "highLowCenter": "Høj, Lav, Center Flush",
+      "downloadedASD": "Downloadet (ASD)",
+      "upliftASD": "Løft (ASD)",
+      "headerMember": "Header (Bærende Medlem)",
+      "joistMember": "Bjælke (Båret Medlem)",
+      "topFlangeBend": "Top Flange Bøjning (Grader)",
+      "topFlangeSlope": "Top Flange Hældning (Grader)",
+      "skewDegrees": "Skævhed (Grader)",
+      "slopeDegrees": "Hældning (Grader)"
+    },
+    "offsetDirectionOptions": {
+      "centeredNoOffset": "Centreret (Ingen Offset)",
+      "leftFlushRight": "Venstre (Flush Højre)",
+      "rightFlushLeft": "Højre (Flush Venstre)"
+    },
+    "highLowCenterOptions": {
+      "center": "Center",
+      "high": "Høj",
+      "low": "Lav"
+    },
+    "tooltips": {
+      "loadDuration": "Varighed af belastningsjusteringer ifølge koden:\n\"STANDARD TERM\" - (K~d~ = 1.00) designbelastninger hvor forholdet overstiger kort tid men er under langtid. Fx sne, levende belastning og døde belastninger kombineret.",
+      "upliftDuration": "Varighed af løftejusteringer:\n\"KORT TERM\" – (K_d = 1.15): designbelastninger hvor forholdet ikke forventes at vare mere end 7 dage kontinuerligt eller kumulativt. Jordskælv og vind betragtes som kort tid.\n\"STANDARD TERM\" – (K_d = 1.00): belastninger der overstiger kort tid men er under langtid. Eksempel: sne, levende belastninger, døde belastninger i kombination.",
+      "memberType": "Vælg medlemstype",
+      "roughSawn": "Oplysninger om Rough Sawn finish"
     }
+  },
+  "buttons": {
+    "submit": "Indsend",
+    "cancel": "Annuller",
+    "reset": "Nulstil",
+    "add": "Tilføj",
+    "remove": "Fjern"
+  },
+  "errors": {
+    "invalidQuantity": "Ugyldigt antal indtastet",
+    "missingJobId": "Job ID er påkrævet",
+    "loadOutOfRange": "Belastningsværdi uden for acceptabelt område"
+  },
+  "notifications": {
+    "savedSuccess": "Indstillinger gemt med succes",
+    "jobAdded": "Job tilføjet til listen"
+  },
+  "placeholders": {
+    "searchConnectors": "Søg efter forbindelser...",
+    "enterQuantity": "Indtast antal"
   }
-  
+}

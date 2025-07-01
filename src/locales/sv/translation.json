@@ -1,37 +1,165 @@
 {
-    "userModal": {
-      "role": "Roll",
-      "team": "Team"
+  "userModal": {
+    "role": "Roll",
+    "team": "Team"
+  },
+  "viewer": {
+    "objectVisibility": "Objekt Synlighet",
+    "carrying": "Bärande",
+    "carried": "Buret",
+    "hanger": "Hängare"
+  },
+  "resultsPanel": {
+    "tabs": {
+      "output": "Resultat",
+      "jobList": "Jobblista"
     },
-    "viewer": {
-      "objectVisibility": "Objektsynlighet",
-      "carrying": "Bärande",
-      "carried": "Buret",
-      "hanger": "Stöd"
+    "addToJobList": "Lägg till i jobblistan",
+    "tableHeaders": {
+      "model": "Modell",
+      "cost": "Kostnad",
+      "load": "Last",
+      "material": "Material",
+      "faceFasteners": "Ytfästen",
+      "joistFasteners": "Bjälkfästen",
+      "edit": "Redigera",
+      "job": "Jobb",
+      "quantity": "Kvantitet",
+      "remove": "Ta bort"
     },
-    "resultsPanel": {
-      "tabs": {
-        "output": "Resultat",
-        "jobList": "Jobblista"
-      },
-      "addToJobList": "Lägg till i jobblista",
-      "tableHeaders": {
-        "model": "Modell",
-        "cost": "Kostnad",
-        "load": "Last",
-        "material": "Material",
-        "faceFasteners": "Frontfästen",
-        "joistFasteners": "Balkfästen",
-        "edit": "Redigera",
-        "job": "Jobb",
-        "quantity": "Antal",
-        "remove": "Ta bort"
-      },
-      "placeholders": {
-        "noResults": "Inga resultat hittades – platshållare för kopplingstabell",
-        "noJobAdded": "Inga jobb tillagda"
-      },
-      "fastenerTotals": "Totala fästen"
+    "placeholders": {
+      "noResults": "Inga resultat hittades – platshållare för kopplingstabell",
+      "noJobAdded": "Inget jobb tillagt än"
+    },
+    "fastenerTotals": "Fästdetaljer totalt"
+  },
+  "appConfigurationModal": {
+    "close": "Stäng modal",
+    "title": "App-konfiguration",
+    "countryOfUse": "Användningsland",
+    "countryOfPurchase": "Köparland",
+    "language": "Språk",
+    "designStandard": "Designstandard",
+    "designMethod": "Designmetod",
+    "designMethodValue": "Gränstillståndsdesign (LSD)",
+    "unit": "Enhet",
+    "unitValue": "Metrisk"
+  },
+  "parametersPanel": {
+    "inputHeader": "INGÅNG",
+    "sections": {
+      "connectionType": "Anslutningstyp",
+      "jobSettings": "Jobbinställningar",
+      "headerMember": "Bärande del",
+      "joistMember": "Bjälkdel",
+      "hangerOptions": "Hängaralternativ"
+    },
+    "connectionOptions": {
+      "joist": "Bjälke (flush topp)",
+      "truss": "Fackverk (flush botten)",
+      "multiTruss": "Multi-fackverk (flush botten)"
+    },
+    "hangerTypes": {
+      "allTypes": "Alla typer",
+      "faceMount": "Frammonterad",
+      "topFlange": "Övre fläns",
+      "concealedFlange": "Dold fläns"
+    },
+    "loadDurations": {
+      "dead90": "Död (90)",
+      "floor100": "Golv (100)",
+      "snow115": "Snö (115)",
+      "roof125": "Tak (125)",
+      "quakeWind160": "Jordbävning/Vind (160)",
+      "standardTerm1": "Standardterm 1,00"
+    },
+    "upliftDurations": {
+      "quakeWind160": "Jordbävning/Vind (160)",
+      "normal100": "Normal (100)",
+      "standardTerm1": "Standardterm 1,00",
+      "shortTerm115": "Kort term 1,15",
+      "mediumTerm15": "Medelterm 1,5"
+    },
+    "memberTypes": {
+      "solidSawn": "Massivt trä",
+      "engineered": "Konstruerat",
+      "glulam": "Limträ",
+      "laminatedStrandLumber": "Laminerat trälamell",
+      "laminatedVeneerLumber": "Laminerat fanerträ",
+      "parallelStrandLumber": "Parallella trälameller",
+      "iJoist": "I-balk",
+      "floorTruss": "Golvfackverk",
+      "ledger": "Balk",
+      "masonryMidWall": "Murarbeten - Mittemur",
+      "masonryTopOfWall": "Murarbeten - Överkant vägg",
+      "concrete": "Betong",
+      "structuralSteel": "Strukturstål",
+      "nailer": "Spiklist",
+      "wallSheathedFlush": "Vägg, beklädd flush",
+      "wallSheathedGap": "Vägg, beklädd med glipa",
+      "wallDrywallFlush": "Vägg, gips flush",
+      "wallDrywallFlushStud": "Vägg, gips flush vid regel",
+      "wallDrywallGap": "Vägg, gips med glipa"
+    },
+    "lumberSpecies": {
+      "df": "DF (Douglasgran)",
+      "sp": "SP (Gran)",
+      "spSouthernPine": "SP (Sydlig tall)",
+      "spf": "SPF (Gran-Tall-Furu)"
+    },
+    "widths": {
+      "2x": "2x (1 1/2\")",
+      "3x": "3x (2 1/2\")"
+    },
+    "depths": {
+      "6": "6 (5 1/2\")",
+      "8": "8 (7 1/4\")"
+    },
+    "numberOfPlies": {
+      "1": "1",
+      "2": "2",
+      "3": "3"
+    },
+    "labels": {
+      "hangerType": "Hängt typ",
+      "loadDuration": "Lastvaraktighet",
+      "upliftDuration": "Lyftvaraktighet",
+      "jobId": "Jobb-ID",
+      "quantity": "Kvantitet",
+      "memberType": "Deltyp",
+      "lumberSpecies": "Träsort",
+      "width": "Bredd",
+      "depth": "Djup",
+      "numberOfPlies": "Antal lager",
+      "memberId": "Del-ID",
+      "roughSawn": "Rough Sawn",
+      "slopeSkewCalculator": "Lutnings- och snedhetsräknare",
+      "offsetDirection": "Förskjutningsriktning",
+      "highLowCenter": "Hög, låg, centrerad",
+      "downloadedASD": "Nedladdad (ASD)",
+      "upliftASD": "Lyft (ASD)",
+      "headerMember": "Bärande del",
+      "joistMember": "Bjälkdel",
+      "topFlangeBend": "Övre flänsböjning (grader)",
+      "topFlangeSlope": "Övre flänslutning (grader)",
+      "skewDegrees": "Snedhet (grader)",
+      "slopeDegrees": "Lutning (grader)"
+    },
+    "offsetDirectionOptions": {
+      "centeredNoOffset": "Centrerad (ingen förskjutning)",
+      "leftFlushRight": "Vänster (flush höger)",
+      "rightFlushLeft": "Höger (flush vänster)"
+    },
+    "highLowCenterOptions": {
+      "center": "Center",
+      "high": "Hög",
+      "low": "Låg"
+    },
+    "tooltips": {
+      "loadDuration": "Varaktighet för lastjusteringar enligt koden:\n\"STANDARDTERM\" - (K~d~ = 1.00) designlaster där tillståndet överstiger kortsiktigt men är under långsiktigt. Exempel: snö, levande last och död last i kombination.",
+      "upliftDuration": "Varaktighet för lyftjusteringar:\n\"KORT TERM\" – (K_d = 1.15): designlaster där tillståndet inte förväntas vara längre än 7 dagar kontinuerligt eller ackumulerat. Jordbävningar och vind anses kortsiktiga.\n\"STANDARDTERM\" – (K_d = 1.00): laster som överstiger kortsiktigt men är under långsiktigt. Exempel: snö, levande last, död last i kombination.",
+      "memberType": "Välj deltyp",
+      "roughSawn": "Information om Rough Sawn-finish"
     }
   }
-  
+}

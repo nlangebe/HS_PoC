@@ -1,37 +1,165 @@
 {
-    "userModal": {
-      "role": "Ruolo",
-      "team": "Squadra"
+  "userModal": {
+    "role": "Ruolo",
+    "team": "Squadra"
+  },
+  "viewer": {
+    "objectVisibility": "Visibilità oggetto",
+    "carrying": "Portante",
+    "carried": "Portato",
+    "hanger": "Appendiabiti"
+  },
+  "resultsPanel": {
+    "tabs": {
+      "output": "Output",
+      "jobList": "Lista lavori"
     },
-    "viewer": {
-      "objectVisibility": "Visibilità oggetti",
-      "carrying": "Portante",
-      "carried": "Portato",
-      "hanger": "Supporto"
+    "addToJobList": "Aggiungi alla lista lavori",
+    "tableHeaders": {
+      "model": "Modello",
+      "cost": "Costo",
+      "load": "Carico",
+      "material": "Materiale",
+      "faceFasteners": "Fissaggi frontali",
+      "joistFasteners": "Fissaggi travi",
+      "edit": "Modifica",
+      "job": "Lavoro",
+      "quantity": "Quantità",
+      "remove": "Rimuovi"
     },
-    "resultsPanel": {
-      "tabs": {
-        "output": "Risultati",
-        "jobList": "Lista lavori"
-      },
-      "addToJobList": "Aggiungi alla lista lavori",
-      "tableHeaders": {
-        "model": "Modello",
-        "cost": "Costo",
-        "load": "Carico",
-        "material": "Materiale",
-        "faceFasteners": "Fissaggi frontali",
-        "joistFasteners": "Fissaggi travi",
-        "edit": "Modifica",
-        "job": "Lavoro",
-        "quantity": "Quantità",
-        "remove": "Rimuovi"
-      },
-      "placeholders": {
-        "noResults": "Nessun risultato trovato – segnaposto per la tabella dei connettori",
-        "noJobAdded": "Nessun lavoro aggiunto"
-      },
-      "fastenerTotals": "Totali fissaggi"
+    "placeholders": {
+      "noResults": "Nessun risultato trovato – segnaposto per tabella connettori",
+      "noJobAdded": "Nessun lavoro aggiunto ancora"
+    },
+    "fastenerTotals": "Totali fissaggi"
+  },
+  "appConfigurationModal": {
+    "close": "Chiudi finestra",
+    "title": "Configurazione app",
+    "countryOfUse": "Paese d’uso",
+    "countryOfPurchase": "Paese d’acquisto",
+    "language": "Lingua",
+    "designStandard": "Norma di progetto",
+    "designMethod": "Metodo di progetto",
+    "designMethodValue": "Progetto agli stati limite (LSD)",
+    "unit": "Unità",
+    "unitValue": "Metrico"
+  },
+  "parametersPanel": {
+    "inputHeader": "INPUT",
+    "sections": {
+      "connectionType": "Tipo di connessione",
+      "jobSettings": "Impostazioni lavoro",
+      "headerMember": "Trave portante (elemento portante)",
+      "joistMember": "Trave (elemento portato)",
+      "hangerOptions": "Opzioni gancio"
+    },
+    "connectionOptions": {
+      "joist": "Trave (superficie superiore a filo)",
+      "truss": "Traliccio (superficie inferiore a filo)",
+      "multiTruss": "Multi-Traliccio (superficie inferiore a filo)"
+    },
+    "hangerTypes": {
+      "allTypes": "Tutti i tipi",
+      "faceMount": "Montaggio frontale",
+      "topFlange": "Flangia superiore",
+      "concealedFlange": "Flangia nascosta"
+    },
+    "loadDurations": {
+      "dead90": "Statico (90)",
+      "floor100": "Pavimento (100)",
+      "snow115": "Neve (115)",
+      "roof125": "Tetto (125)",
+      "quakeWind160": "Terremoto/Vento (160)",
+      "standardTerm1": "Termine standard 1,00"
+    },
+    "upliftDurations": {
+      "quakeWind160": "Terremoto/Vento (160)",
+      "normal100": "Normale (100)",
+      "standardTerm1": "Termine standard 1,00",
+      "shortTerm115": "Breve termine 1,15",
+      "mediumTerm15": "Termine medio 1,5"
+    },
+    "memberTypes": {
+      "solidSawn": "Legno massiccio",
+      "engineered": "Ingegnerizzato",
+      "glulam": "Legno lamellare",
+      "laminatedStrandLumber": "Legno a filamenti laminati",
+      "laminatedVeneerLumber": "Legno impiallacciato laminato",
+      "parallelStrandLumber": "Legno a filamenti paralleli",
+      "iJoist": "Trave a I",
+      "floorTruss": "Traliccio pavimento",
+      "ledger": "Trave di supporto",
+      "masonryMidWall": "Muratura - parete media",
+      "masonryTopOfWall": "Muratura - cima parete",
+      "concrete": "Calcestruzzo",
+      "structuralSteel": "Acciaio strutturale",
+      "nailer": "Chiodatrice",
+      "wallSheathedFlush": "Parete, rivestimento a filo",
+      "wallSheathedGap": "Parete, rivestimento con gap",
+      "wallDrywallFlush": "Parete, cartongesso a filo",
+      "wallDrywallFlushStud": "Parete, cartongesso a filo su montanti",
+      "wallDrywallGap": "Parete, cartongesso con gap"
+    },
+    "lumberSpecies": {
+      "df": "DF (Abete Douglas)",
+      "sp": "SP (Abete)",
+      "spSouthernPine": "SP (Pino del Sud)",
+      "spf": "SPF (Abete-Pino-Fir)"
+    },
+    "widths": {
+      "2x": "2x (1 1/2\")",
+      "3x": "3x (2 1/2\")"
+    },
+    "depths": {
+      "6": "6 (5 1/2\")",
+      "8": "8 (7 1/4\")"
+    },
+    "numberOfPlies": {
+      "1": "1",
+      "2": "2",
+      "3": "3"
+    },
+    "labels": {
+      "hangerType": "Tipo di gancio",
+      "loadDuration": "Durata carico",
+      "upliftDuration": "Durata sollevamento",
+      "jobId": "ID lavoro",
+      "quantity": "Quantità",
+      "memberType": "Tipo elemento",
+      "lumberSpecies": "Specie legno",
+      "width": "Larghezza",
+      "depth": "Profondità",
+      "numberOfPlies": "Numero di strati",
+      "memberId": "ID elemento",
+      "roughSawn": "Rough Sawn",
+      "slopeSkewCalculator": "Calcolatore pendenza e inclinazione",
+      "offsetDirection": "Direzione offset",
+      "highLowCenter": "Alto, Basso, Affiancato al centro",
+      "downloadedASD": "Scaricato (ASD)",
+      "upliftASD": "Sollevamento (ASD)",
+      "headerMember": "Trave portante (elemento portante)",
+      "joistMember": "Trave (elemento portato)",
+      "topFlangeBend": "Curvatura flangia superiore (gradi)",
+      "topFlangeSlope": "Pendenza flangia superiore (gradi)",
+      "skewDegrees": "Inclinazione (gradi)",
+      "slopeDegrees": "Pendenza (gradi)"
+    },
+    "offsetDirectionOptions": {
+      "centeredNoOffset": "Centrato (nessun offset)",
+      "leftFlushRight": "Sinistra (affiancato a destra)",
+      "rightFlushLeft": "Destra (affiancato a sinistra)"
+    },
+    "highLowCenterOptions": {
+      "center": "Centro",
+      "high": "Alto",
+      "low": "Basso"
+    },
+    "tooltips": {
+      "loadDuration": "Durata degli aggiustamenti del carico come specificato dal codice:\n\"TERMINE STANDARD\" - (K~d~ = 1.00) carichi di progetto dove la condizione supera il breve termine ma è inferiore al lungo termine. Ad esempio neve, carichi vivi e carichi morti combinati.",
+      "upliftDuration": "Durata degli aggiustamenti di sollevamento:\n\"BREVE TERMINE\" – (K_d = 1.15): carichi di progetto dove la condizione non dovrebbe durare più di 7 giorni continuativi o cumulativi. Terremoti e venti sono considerati breve termine.\n\"TERMINE STANDARD\" – (K_d = 1.00): carichi che superano il breve termine ma sono inferiori al lungo termine. Esempio: neve, carichi vivi, carichi morti combinati.",
+      "memberType": "Seleziona tipo elemento",
+      "roughSawn": "Informazioni finitura Rough Sawn"
     }
   }
-  
+}
