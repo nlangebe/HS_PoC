@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 
 interface HeaderProps {
   country: string;
-  language: string;
   onOpenConfig: () => void;
   onOpenUserModal: () => void;
 }
@@ -25,71 +24,57 @@ const countries = {
   Australia: "https://flagcdn.com/au.svg",
 };
 
-const languageAcronymMap: Record<string, string> = {
-  English: "EN",
-  French: "FR",
-  German: "DE",
-  Polish: "PL",
-  Italian: "IT",
-  Swedish: "SV",
-  Norwegian: "NO",
-  Danish: "DA",
+const langAcronyms: Record<string, string> = {
+  en: "EN",
+  fr: "FR",
+  de: "DE",
+  pl: "PL",
+  it: "IT",
+  sv: "SV",
+  no: "NO",
+  da: "DA",
 };
 
 const Header: React.FC<HeaderProps> = ({
   country,
-  language,
   onOpenConfig,
   onOpenUserModal,
 }) => {
+  const { i18n, t } = useTranslation();
   const flagUrl = countries[country] || countries["USA"];
-  const langAcronym = languageAcronymMap[language] || "EN";
-  const { t } = useTranslation();
+  const currentLang = i18n.language || "en";
+  const langAcronym = langAcronyms[currentLang] || "EN";
+
   return (
     <header className="h-12 bg-[#f4f4f4] border-b border-gray-300 flex items-center justify-between px-4 text-sm">
-      {/* LEFT: Logo + Menu */}
+      {/* LEFT */}
       <div className="flex items-center space-x-4">
         <img
           src="/Images/logo.svg"
           alt="Simpson Strong-Tie Logo"
           className="h-6 w-auto"
         />
-
         <nav className="flex items-center space-x-4 text-gray-600">
-          <button
-            className="hover:underline hover:text-[#5b3a00] font-semibold transition duration-200"
-            aria-label="File menu"
-          >
+          <button className="hover:underline hover:text-[#5b3a00] font-semibold transition duration-200">
             File
           </button>
-          <button
-            className="hover:underline hover:text-[#5b3a00] font-semibold transition duration-200"
-            aria-label="About"
-          >
+          <button className="hover:underline hover:text-[#5b3a00] font-semibold transition duration-200">
             About
           </button>
-          <button
-            className="hover:underline hover:text-[#5b3a00] font-semibold transition duration-200"
-            aria-label="Reset"
-          >
+          <button className="hover:underline hover:text-[#5b3a00] font-semibold transition duration-200">
             Reset
           </button>
-          <button
-            className="hover:underline hover:text-[#5b3a00] font-semibold transition duration-200"
-            aria-label="Help Center"
-          >
+          <button className="hover:underline hover:text-[#5b3a00] font-semibold transition duration-200">
             Help Center
           </button>
         </nav>
       </div>
 
-      {/* RIGHT: Country display + separator + user icon */}
+      {/* RIGHT */}
       <div className="flex items-center space-x-3">
         <button
           onClick={onOpenConfig}
           className="border border-gray-400 rounded px-3 py-[2px] text-xs sm:text-sm text-black flex items-center space-x-2 font-semibold hover:bg-gray-200 transition"
-          aria-label="Open configuration settings"
-          title="Open configuration settings"
         >
           <span>Country:</span>
           <img
@@ -100,9 +85,7 @@ const Header: React.FC<HeaderProps> = ({
           <span>| Language: {langAcronym}</span>
         </button>
 
-        <span className="text-gray-400 mx-2 select-none" aria-hidden="true">
-          |
-        </span>
+        <span className="text-gray-400 mx-2 select-none">|</span>
 
         <button
           onClick={onOpenUserModal}

@@ -109,8 +109,10 @@ const AppConfigurationModal: React.FC<AppConfigurationModalProps> = ({
   useEffect(() => {
     if (!languageManuallyChanged) {
       const autoLang = countryLanguageMap[countryOfUse] || "en";
-      setLanguage(autoLang);
-      i18n.changeLanguage(autoLang);
+      if (language !== autoLang) {
+        setLanguage(autoLang);
+        i18n.changeLanguage(autoLang);
+      }
     }
   }, [countryOfUse, languageManuallyChanged, setLanguage, i18n]);
 
